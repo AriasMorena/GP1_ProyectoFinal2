@@ -13,6 +13,7 @@ import java.util.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author arias
@@ -48,10 +49,10 @@ public class PeliculaData {
             ps.setDate(6, fechaSql);
             ps.setBoolean(7, pelicula.isEnCartelera());
             ps.executeUpdate();
-            System.out.println("Pelicula guardada");
+            JOptionPane.showMessageDialog(null, "Pelicula guardada");
             
         } catch (SQLException ex) {
-            System.out.println("Error al guardar pelicula" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al guardar pelicula" + ex.getMessage());
         }  
     }
     
@@ -82,7 +83,7 @@ public class PeliculaData {
             
         } catch (SQLException ex) {
             
-            System.out.println("Error al buscar la pelicula:" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al buscar la pelicula:" + ex.getMessage());
         }
         return pelicula;
      }
@@ -112,10 +113,10 @@ public class PeliculaData {
             ps.setBoolean(7, pelicula.isEnCartelera());
             ps.executeUpdate();
             ps.close();
-            System.out.println("Pelicula modificada");
+            JOptionPane.showMessageDialog(null, "Pelicula modificada");
             
         } catch (SQLException ex) {
-            System.out.println("Error al modificar la pelicula:" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al modificar la pelicula:" + ex.getMessage());
         }
     }
     
@@ -130,14 +131,14 @@ public class PeliculaData {
              int filas = ps.executeUpdate();
              
              if(filas > 0) {
-                 System.out.println("Pelicula eliminada correctamente.");
+                 JOptionPane.showMessageDialog(null, "Pelicula eliminada correctamente.");
              } else{
-                 System.out.println("No se encontró ninguna pelicula con ese ID.");
+                 JOptionPane.showMessageDialog(null, "No se encontró ninguna pelicula con ese ID.");
              }
              ps.close();
         }catch(SQLException ex){
             
-            System.out.println("Error al eliminar la pelicula:" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al eliminar la pelicula:" + ex.getMessage());
         }
     }
 
@@ -165,7 +166,8 @@ public class PeliculaData {
             }
             ps.close();
         } catch (SQLException ex) {          
-            System.out.println("Error al listar las peliculas:" + ex.getMessage());
+            
+            JOptionPane.showMessageDialog(null, "Error al listar las peliculas:" + ex.getMessage());
         }
       return listarPeliculas;  
     }
