@@ -1,7 +1,7 @@
 
 package Entidades;
 
-import.java.util.Date;
+import java.util.Date;
 /**
  *
  * @author Bustos Guada
@@ -74,10 +74,10 @@ public class Comprador {
     public String toString (){
         return "Comprador{" + 
                 "dni=" + dni +
-                ", nombre=" + nombre + ´\" +
+                ", nombre=" + nombre + 
                 ", fechaNac=" + fechaNac +
-                ", password="  + password + "´\" +
-                ", medioPago=" + medioPago + "´\" +
+                ", password="  + password +
+                ", medioPago=" + medioPago + 
                 "}";   
                 
     }

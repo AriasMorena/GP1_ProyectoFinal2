@@ -1,7 +1,7 @@
 
 package Entidades;
 
-import.java.util.Date;
+import java.util.Date;
 /**
  *
  * @author Bustos Guada
@@ -78,12 +78,12 @@ public class Ticket {
         }
     }
     
-    @override
+    @Override
     public String toString(){
         return "Ticket{" +
                 "codigoVenta=" + codigoVenta +
                 ", fechaCompra=" + fechaCompra +
-                ", medioPago="  + medioPago + ´\" + "
+                ", medioPago="  + medioPago +
                 ", precio=" + precio +
                 "}";
     }

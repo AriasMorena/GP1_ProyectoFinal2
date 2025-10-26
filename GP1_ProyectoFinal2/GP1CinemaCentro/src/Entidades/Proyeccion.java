@@ -1,7 +1,7 @@
 
 package Entidades;
 
-import.java.util.Time;
+import java.sql.*;
 /**
  *
  * @author Bustos Guada
