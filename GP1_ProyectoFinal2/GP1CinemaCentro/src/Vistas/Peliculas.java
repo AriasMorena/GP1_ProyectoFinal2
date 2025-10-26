@@ -6,9 +6,9 @@ package Vistas;
 
 import Entidades.*;
 import Persistencia.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.mariadb.jdbc.Connection;
@@ -29,7 +29,6 @@ public class Peliculas extends javax.swing.JInternalFrame {
     public Peliculas() {
         initComponents();
         cabecera();
-        bloquarId();
     }
 
     /**
@@ -113,6 +112,11 @@ public class Peliculas extends javax.swing.JInternalFrame {
         });
 
         jtMostrar.setText("Mostrar Peliculas");
+        jtMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtMostrarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +133,11 @@ public class Peliculas extends javax.swing.JInternalFrame {
         });
 
         jtModificar.setText("Modificar");
+        jtModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtModificarActionPerformed(evt);
+            }
+        });
 
         jtEliminar.setText("Eliminar");
         jtEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -277,16 +286,43 @@ public class Peliculas extends javax.swing.JInternalFrame {
 
     private void jtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBuscarActionPerformed
         // TODO add your handling code here:
+        
+        String id = jtId.getText();
+         
+        jtId.setEditable(true);
+
+         if (id.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Buscar.");
+        } else {
+             
+             buscarPelicula ();
+             jtId.setEditable(false);  
+         }          
     }//GEN-LAST:event_jtBuscarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+        
+        jtId.setEditable(false);  
+
         ingrearPelicula ();
         limpiarCampos();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEliminarActionPerformed
         // TODO add your handling code here:
+        String id = jtId.getText();
+         
+        jtId.setEditable(true);
+
+         if (id.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Eliminar.");
+        } else {
+             
+             jtId.setEditable(false);  
+         }                   
     }//GEN-LAST:event_jtEliminarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -294,6 +330,27 @@ public class Peliculas extends javax.swing.JInternalFrame {
         
         dispose ();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtModificarActionPerformed
+        // TODO add your handling code here:
+        String id = jtId.getText();
+         
+         jtId.setEditable(true);
+
+         if (id.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Modificar.");
+        } else {
+             
+             jtId.setEditable(false);  
+         }          
+    }//GEN-LAST:event_jtModificarActionPerformed
+
+    private void jtMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMostrarActionPerformed
+        // TODO add your handling code here:
+        
+        cargarPeliculas ();
+    }//GEN-LAST:event_jtMostrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -329,6 +386,7 @@ public class Peliculas extends javax.swing.JInternalFrame {
 
         boolean enCartelera = true;
         
+        
         String titulo = jtTitulo.getText();
         String director = jtDirector.getText();
         String actores = jtActores.getText();
@@ -338,16 +396,102 @@ public class Peliculas extends javax.swing.JInternalFrame {
                 
         if (titulo.isEmpty() || director.isEmpty() || actores.isEmpty() || origen.isEmpty() || genero.isEmpty() || estreno == null) {
             
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
             return;
             
         } else {
             
-            Pelicula peli = new Pelicula ( titulo, director, actores, origen, genero, estreno, enCartelera);
+            Pelicula peli = new Pelicula (0 ,titulo, director, actores, origen, genero, estreno, enCartelera);
             
             peliData.guardarPelicula(peli);
         }
     }
+    private void buscarPelicula (){
+        
+        modelo.setRowCount(0);
+        
+        int id;
+        String enCarte = "";
+        
+        try {
+  
+            id = Integer.parseInt(jtId.getText());
+            Pelicula p = peliData.buscarPelicula(id);
+            if (p.isEnCartelera() == true) {
+                
+                enCarte = "Si";
+            
+            }   else {
+                
+                enCarte= "No";
+            } 
+            
+            if (p != null) {
+                
+                modelo.addRow(new Object []{
+                    
+                    p.getIdPelicula(),
+                    p.getTitulo(),
+                    p.getDirector(),
+                    p.getActores(),
+                    p.getOrigen(),
+                    p.getOrigen(),
+                    p.getGenero(),
+                    p.getEstreno(),
+                    enCarte
+                });
+            }
+        
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
+            return;
+        }        
+    }
+    
+    private void modificar(){
+        
+        
+    }
+    
+    private void cargarPeliculas (){
+            
+        List <Pelicula> lista = peliData.listarPeliculas();
+        modelo.setRowCount(0);
+        String enCarte = "";
+        
+
+        for (Pelicula p: lista) {
+            
+            if (p.isEnCartelera() == true) {
+                
+                enCarte = "Si";
+            
+            }   else {
+                
+                enCarte= "No";
+            }   
+                
+         
+            modelo.addRow(new Object []{
+               p.getIdPelicula(),
+               p.getTitulo(),
+               p.getDirector(),
+               p.getActores(),
+               p.getOrigen(),
+               p.getGenero(),
+               p.getEstreno(),
+               enCarte
+            });
+        }
+
+    }
+    
+    
+    
+    
+    
+    
     
     
     private void cabecera(){
@@ -373,10 +517,5 @@ public class Peliculas extends javax.swing.JInternalFrame {
         jtOrigen.setText("");
         jtGenero.setText("");
         jdcEstreno.setDate(null);
-    }
-     
-     private void bloquarId(){
-        
-        jtId.setEditable(false);
     }
 }

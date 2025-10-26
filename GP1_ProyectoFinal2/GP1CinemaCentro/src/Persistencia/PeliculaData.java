@@ -70,12 +70,13 @@ public class PeliculaData {
             if (rs.next()){
                 
             pelicula = new Pelicula();
+            pelicula.setIdPelicula(rs.getInt("id_pelicula"));
             pelicula.setTitulo(rs.getString("titulo"));
             pelicula.setDirector(rs.getString("director"));
             pelicula.setOrigen(rs.getString("origen"));
             pelicula.setGenero(rs.getString("genero"));
             pelicula.setEstreno(rs.getDate("estreno"));
-            pelicula.setEnCartelera(rs.getBoolean("estado"));
+            pelicula.setEnCartelera(rs.getBoolean("enCartelera"));
             
             
             }
@@ -155,6 +156,7 @@ public class PeliculaData {
             while (rs.next()){
             
                 Pelicula pelicula = new Pelicula ();
+                pelicula.setIdPelicula(rs.getInt("id_pelicula"));
                 pelicula.setTitulo(rs.getString("titulo"));
                 pelicula.setDirector(rs.getString("director"));
                 pelicula.setActores(rs.getString("actores"));
