@@ -24,6 +24,10 @@ public class Proyeccion {
         this.precioLugar = precioLugar;
     }
 
+    public Proyeccion() {
+    }
+    
+
     public String getIdioma() {
         return idioma;
     }

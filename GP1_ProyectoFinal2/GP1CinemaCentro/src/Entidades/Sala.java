@@ -8,15 +8,18 @@ package Entidades;
 public class Sala {
     
     private int nroSala;
-    private boolean apata3D;
+    private boolean apta3D;
     private int capacidad;
     private String estado;
 
-    public Sala(int nroSala, boolean apata3D, int capacidad, String estado) {
+    public Sala(int nroSala, boolean apta3D, int capacidad, String estado) {
         this.nroSala = nroSala;
-        this.apata3D = apata3D;
+        this.apta3D = apta3D;
         this.capacidad = capacidad;
         this.estado = estado;
+    }
+
+    public Sala() {
     }
 
     public int getNroSala() {
@@ -27,12 +30,12 @@ public class Sala {
         this.nroSala = nroSala;
     }
 
-    public boolean isApata3D() {
-        return apata3D;
+    public boolean isApta3D() {
+        return apta3D;
     }
 
-    public void setApata3D(boolean apata3D) {
-        this.apata3D = apata3D;
+    public void setApta3D(boolean apta3D) {
+        this.apta3D = apta3D;
     }
 
     public int getCapacidad() {
