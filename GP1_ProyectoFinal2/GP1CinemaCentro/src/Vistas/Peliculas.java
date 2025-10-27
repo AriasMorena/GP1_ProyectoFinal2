@@ -342,7 +342,10 @@ public class Peliculas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Modificar.");
         } else {
              
+             modificar();
              jtId.setEditable(false);  
+             limpiarCampos();
+             cargarPeliculas();
          }          
     }//GEN-LAST:event_jtModificarActionPerformed
 
@@ -450,9 +453,96 @@ public class Peliculas extends javax.swing.JInternalFrame {
     }
     
     private void modificar(){
+                
+        int id;
+   
+        String titulo = jtTitulo.getText();
+        String director = jtDirector.getText();
+        String actores = jtActores.getText();
+        String origen = jtOrigen.getText();
+        String genero = jtGenero.getText();
+        Date estreno = jdcEstreno.getDate();
+        
+        String tit = "";
+        String dir = "";
+        String acto = "Desconocido";
+        String ori = "";
+        String gen = "";
+        Date estr = null;
+                       
+        boolean enCarte = true;
+        try {
+  
+            id = Integer.parseInt(jtId.getText());
+            
         
         
-    }
+            Pelicula peli = peliData.buscarPelicula(id);
+        
+            if (titulo.isEmpty() == true) {
+            
+                tit = peli.getTitulo();
+            } else {
+            
+                tit = titulo;
+            }
+        
+            if (director.isEmpty() == true) {
+            
+                dir = peli.getDirector();
+            } else {
+            
+                dir = director;
+            }
+        
+            if (actores.isEmpty() == true) {
+            
+                acto = peli.getActores();
+            } else {
+            
+                acto = actores;
+            }
+        
+            if (origen.isEmpty() == true) {
+            
+                ori = peli.getOrigen();
+            } else {
+            
+                ori = origen;
+            }
+        
+            if (genero.isEmpty() == true) {
+            
+                gen = peli.getGenero();
+            } else {
+            
+                gen = genero;
+            }
+        
+            if (estr == null) {
+            
+                estr = peli.getEstreno();
+            } else {
+            
+                estr = estreno;
+            }
+        
+            Pelicula peli2 = new Pelicula (id, tit, dir, acto, ori, gen, estr, enCarte);
+        
+            int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Modificar la Pelicula: " + jtTitulo.getText() + "?" , 
+                    " Confirmar Actualizacion:", JOptionPane.YES_NO_OPTION);
+        
+            if (confirmar == JOptionPane.YES_OPTION) {
+                
+                peliData.modificarPelicula(peli2);           
+            }
+        
+            } catch (NumberFormatException e){
+            
+                JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
+                return;
+            }
+        }
     
     private void cargarPeliculas (){
             

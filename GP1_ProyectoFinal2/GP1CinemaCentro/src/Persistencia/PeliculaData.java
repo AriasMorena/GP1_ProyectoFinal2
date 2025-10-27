@@ -73,6 +73,7 @@ public class PeliculaData {
             pelicula.setIdPelicula(rs.getInt("id_pelicula"));
             pelicula.setTitulo(rs.getString("titulo"));
             pelicula.setDirector(rs.getString("director"));
+            pelicula.setActores(rs.getString("actores"));
             pelicula.setOrigen(rs.getString("origen"));
             pelicula.setGenero(rs.getString("genero"));
             pelicula.setEstreno(rs.getDate("estreno"));
@@ -91,7 +92,7 @@ public class PeliculaData {
 
     public void modificarPelicula (Pelicula pelicula) {
     
-        String sql = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ?, enCartelera = ? WHERE id_pelicula = ?" ;
+        String sql = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ? WHERE id_pelicula = ?" ;
     
         PreparedStatement ps;
         
@@ -111,7 +112,7 @@ public class PeliculaData {
             ps.setString(4, pelicula.getOrigen());
             ps.setString(5, pelicula.getGenero());
             ps.setDate(6, fechaSql);
-            ps.setBoolean(7, pelicula.isEnCartelera());
+            ps.setInt(7, pelicula.getIdPelicula());
             ps.executeUpdate();
             ps.close();
             JOptionPane.showMessageDialog(null, "Pelicula modificada");
