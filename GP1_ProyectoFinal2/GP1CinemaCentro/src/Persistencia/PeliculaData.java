@@ -148,7 +148,7 @@ public class PeliculaData {
       
         List<Pelicula>listarPeliculas = new ArrayList<>();
         
-        String sql = "SELECT * FROM pelicula WHERE enCartelera = 1";
+        String sql = "SELECT * FROM pelicula ";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -157,6 +157,10 @@ public class PeliculaData {
             while (rs.next()){
             
                 Pelicula pelicula = new Pelicula ();
+                
+                if (true) {
+                    
+                }
                 pelicula.setIdPelicula(rs.getInt("id_pelicula"));
                 pelicula.setTitulo(rs.getString("titulo"));
                 pelicula.setDirector(rs.getString("director"));
@@ -164,7 +168,7 @@ public class PeliculaData {
                 pelicula.setOrigen(rs.getString("origen"));
                 pelicula.setGenero(rs.getString("genero"));
                 pelicula.setEstreno(rs.getDate("estreno"));
-                pelicula.setEnCartelera(true);
+                pelicula.setEnCartelera(rs.getBoolean("enCartelera"));
                 listarPeliculas.add(pelicula);
             }
             ps.close();
@@ -173,5 +177,58 @@ public class PeliculaData {
             JOptionPane.showMessageDialog(null, "Error al listar las peliculas:" + ex.getMessage());
         }
       return listarPeliculas;  
+    }
+    public void darDeAlta (int id){
+
+        int activo = 1;
+        String sql = "UPDATE pelicula SET enCartelera = 1 WHERE id_pelicula = ?";
+        
+        try {
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    
+                    ps.setInt(1, id);
+                    int filas = ps.executeUpdate();
+                    
+                    if (filas > 0) {
+                        
+                        JOptionPane.showMessageDialog(null, "Pelicula ha sido puesta en cartelera.");
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(null, "No se encontro una Pelicula con ese ID.");
+                    }
+                
+            } catch (SQLException ex){
+                
+                JOptionPane.showMessageDialog(null, "Error al poner en cartelera la Pelicual: " + ex);
+            }
+    }
+    
+    public void darDeBaja (int id){
+
+        String sql = "UPDATE pelicula SET enCartelera = ? WHERE id_pelicula = ?";
+        
+        try {
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    
+                    ps.setBoolean(1, false);
+                    ps.setInt(2, id);
+                    
+                    
+                    
+                    int filas = ps.executeUpdate();
+                    
+                    if (filas > 0) {
+                        
+                        JOptionPane.showMessageDialog(null, "Pelicula ha sido sacada de las carteleras.");
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(null, "No se encontro una Pelicula con ese ID.");
+                    }
+                
+            } catch (SQLException ex){
+                
+                JOptionPane.showMessageDialog(null, "Error al poner en cartelera la Pelicual: " + ex);
+            }
+        
     }
 }

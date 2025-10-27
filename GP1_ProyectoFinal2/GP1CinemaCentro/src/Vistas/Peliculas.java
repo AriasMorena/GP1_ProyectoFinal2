@@ -64,8 +64,8 @@ public class Peliculas extends javax.swing.JInternalFrame {
         jtModificar = new javax.swing.JButton();
         jtEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbAlta = new javax.swing.JButton();
+        jbBaja = new javax.swing.JButton();
 
         jtPeliculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,9 +153,19 @@ public class Peliculas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Dar de Alta");
+        jbAlta.setText("Dar de Alta");
+        jbAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Dar de Baja");
+        jbBaja.setText("Dar de Baja");
+        jbBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,9 +188,9 @@ public class Peliculas extends javax.swing.JInternalFrame {
                                 .addGap(50, 50, 50)
                                 .addComponent(jtEliminar)
                                 .addGap(50, 50, 50)
-                                .addComponent(jButton1)
+                                .addComponent(jbAlta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(jbBaja))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -266,8 +276,8 @@ public class Peliculas extends javax.swing.JInternalFrame {
                     .addComponent(jtBuscar)
                     .addComponent(jtModificar)
                     .addComponent(jtEliminar)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jbAlta)
+                    .addComponent(jbBaja))
                 .addGap(18, 29, Short.MAX_VALUE)
                 .addComponent(jtMostrar)
                 .addGap(34, 34, 34)
@@ -297,7 +307,8 @@ public class Peliculas extends javax.swing.JInternalFrame {
         } else {
              
              buscarPelicula ();
-             jtId.setEditable(false);  
+             jtId.setEditable(false); 
+             limpiarCampos();
          }          
     }//GEN-LAST:event_jtBuscarActionPerformed
 
@@ -321,7 +332,10 @@ public class Peliculas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Eliminar.");
         } else {
              
+             eliminarPelis();
              jtId.setEditable(false);  
+             limpiarCampos();
+             cargarPeliculas();
          }                   
     }//GEN-LAST:event_jtEliminarActionPerformed
 
@@ -355,10 +369,45 @@ public class Peliculas extends javax.swing.JInternalFrame {
         cargarPeliculas ();
     }//GEN-LAST:event_jtMostrarActionPerformed
 
+    private void jbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaActionPerformed
+        // TODO add your handling code here:
+        String id = jtId.getText();
+         
+         jtId.setEditable(true);
+
+         if (id.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Poner en Cartelera.");
+        } else {
+             
+            darAlta();
+            jtId.setEditable(false);  
+            limpiarCampos();
+            cargarPeliculas();
+         }
+
+    }//GEN-LAST:event_jbAltaActionPerformed
+
+    private void jbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaActionPerformed
+        // TODO add your handling code here:
+        String id = jtId.getText();
+         
+         jtId.setEditable(true);
+
+         if (id.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Poner en Cartelera.");
+        } else {
+             
+            darBaja();
+            jtId.setEditable(false);  
+            limpiarCampos();
+            cargarPeliculas();
+         }
+    }//GEN-LAST:event_jbBajaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -369,6 +418,8 @@ public class Peliculas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jbAlta;
+    private javax.swing.JButton jbBaja;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdcEstreno;
@@ -419,30 +470,37 @@ public class Peliculas extends javax.swing.JInternalFrame {
         try {
   
             id = Integer.parseInt(jtId.getText());
-            Pelicula p = peliData.buscarPelicula(id);
-            if (p.isEnCartelera() == true) {
-                
-                enCarte = "Si";
             
-            }   else {
-                
-                enCarte= "No";
-            } 
-            
-            if (p != null) {
-                
-                modelo.addRow(new Object []{
+            if (peliData.buscarPelicula(id) != null) {
+               
+                Pelicula p = peliData.buscarPelicula(id);
+              
+                if (p.isEnCartelera() == true) {
                     
-                    p.getIdPelicula(),
-                    p.getTitulo(),
-                    p.getDirector(),
-                    p.getActores(),
-                    p.getOrigen(),
-                    p.getOrigen(),
-                    p.getGenero(),
-                    p.getEstreno(),
-                    enCarte
-                });
+                    enCarte = "Si"; 
+                }   else {
+                
+                    enCarte= "No";
+                } 
+            
+                if (p != null) {
+                
+                    modelo.addRow(new Object []{
+                    
+                        p.getIdPelicula(),
+                        p.getTitulo(),
+                        p.getDirector(),
+                        p.getActores(),
+                        p.getOrigen(),
+                        p.getOrigen(),
+                        p.getGenero(),
+                        p.getEstreno(),
+                        enCarte
+                    });
+                }
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado");
             }
         
         } catch (NumberFormatException e){
@@ -474,75 +532,153 @@ public class Peliculas extends javax.swing.JInternalFrame {
         try {
   
             id = Integer.parseInt(jtId.getText());
-            
-        
-        
+     
             Pelicula peli = peliData.buscarPelicula(id);
+            
+            if (peliData.buscarPelicula(id) != null) {
+                 
+                if (titulo.isEmpty() == true) {
+            
+                    tit = peli.getTitulo();
+                } else {
+            
+                    tit = titulo;
+                }
         
-            if (titulo.isEmpty() == true) {
+                if (director.isEmpty() == true) {
             
-                tit = peli.getTitulo();
-            } else {
+                    dir = peli.getDirector();
+                } else {
             
-                tit = titulo;
-            }
+                    dir = director;
+                }
         
-            if (director.isEmpty() == true) {
+                if (actores.isEmpty() == true) {
             
-                dir = peli.getDirector();
-            } else {
+                    acto = peli.getActores();
+                } else {
             
-                dir = director;
-            }
+                    acto = actores;
+                }
         
-            if (actores.isEmpty() == true) {
+                if (origen.isEmpty() == true) {
             
-                acto = peli.getActores();
-            } else {
+                    ori = peli.getOrigen();
+                } else {
             
-                acto = actores;
-            }
+                    ori = origen;
+                }
         
-            if (origen.isEmpty() == true) {
+                if (genero.isEmpty() == true) {
             
-                ori = peli.getOrigen();
-            } else {
+                    gen = peli.getGenero();
+                } else {
             
-                ori = origen;
-            }
+                    gen = genero;
+                }
         
-            if (genero.isEmpty() == true) {
+                if (estr == null) {
             
-                gen = peli.getGenero();
-            } else {
+                    estr = peli.getEstreno();
+                } else {
             
-                gen = genero;
-            }
+                    estr = estreno;
+                }
         
-            if (estr == null) {
-            
-                estr = peli.getEstreno();
-            } else {
-            
-                estr = estreno;
-            }
+                Pelicula peli2 = new Pelicula (id, tit, dir, acto, ori, gen, estr, enCarte);
         
-            Pelicula peli2 = new Pelicula (id, tit, dir, acto, ori, gen, estr, enCarte);
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Modificar la Pelicula: " + jtTitulo.getText() + "?" , 
+                        " Confirmar Actualizacion:", JOptionPane.YES_NO_OPTION);
         
-            int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Modificar la Pelicula: " + jtTitulo.getText() + "?" , 
-                    " Confirmar Actualizacion:", JOptionPane.YES_NO_OPTION);
-        
-            if (confirmar == JOptionPane.YES_OPTION) {
+                if (confirmar == JOptionPane.YES_OPTION) {
                 
-                peliData.modificarPelicula(peli2);           
-            }
+                    peliData.modificarPelicula(peli2);           
+                }
         
+                } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado.");
+            }
             } catch (NumberFormatException e){
             
                 JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
                 return;
             }
         }
+    
+    private void eliminarPelis(){
+        
+        int id;
+        
+        try{
+            
+            id = Integer.parseInt(jtId.getText());
+            
+            if (peliData.buscarPelicula(id) != null) {
+                
+            
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Eliminar la Pelicula:" + jtTitulo.getText() + "?", 
+                        " Confirmar el Borrado: ", JOptionPane.YES_NO_OPTION);
+            
+                if (confirmar == JOptionPane.YES_OPTION) {
+                
+                    peliData.eliminarPelicula(id);
+                }
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado");
+            }
+        } catch (NumberFormatException e){
+            
+                JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
+                return;
+        }
+    }
+    
+    private void darAlta(){
+        
+        int id;
+
+        try{
+            
+            id = Integer.parseInt(jtId.getText());
+            
+            if (peliData.buscarPelicula(id) != null) {
+                
+                peliData.darDeAlta(id);
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado");
+            }
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
+            return;
+        }  
+    }
+    
+    private void darBaja (){
+        
+        int id;
+        
+        try {
+            
+            id = Integer.parseInt(jtId.getText());
+            
+            if (peliData.buscarPelicula(id) != null) {
+                
+                peliData.darDeBaja(id);
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado");
+            }
+            
+            
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El Id debe ser un numero entero." );
+        }
+    }
     
     private void cargarPeliculas (){
             
@@ -576,14 +712,7 @@ public class Peliculas extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
+  
     private void cabecera(){
         
         modelo.addColumn("ID");
