@@ -32,6 +32,8 @@ public class Escritorio extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmPelicula = new javax.swing.JMenu();
         jmiPelicula = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jmiSalas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmiSalir = new javax.swing.JMenuItem();
 
@@ -59,6 +61,23 @@ public class Escritorio extends javax.swing.JFrame {
         jmPelicula.add(jmiPelicula);
 
         jMenuBar1.add(jmPelicula);
+
+        jMenu1.setText("Salas");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jmiSalas.setText("Salas");
+        jmiSalas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiSalas);
+
+        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
 
@@ -111,6 +130,20 @@ public class Escritorio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiSalirActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jmiSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalasActionPerformed
+        // TODO add your handling code here:
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        Sala vistaS = new Sala ();
+        vistaS.setVisible(true);
+        jdEscritorio.add(vistaS);
+        jdEscritorio.moveToFront(vistaS);
+    }//GEN-LAST:event_jmiSalasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -147,11 +180,13 @@ public class Escritorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenu jmPelicula;
     private javax.swing.JMenuItem jmiPelicula;
+    private javax.swing.JMenuItem jmiSalas;
     private javax.swing.JMenuItem jmiSalir;
     // End of variables declaration//GEN-END:variables
 }

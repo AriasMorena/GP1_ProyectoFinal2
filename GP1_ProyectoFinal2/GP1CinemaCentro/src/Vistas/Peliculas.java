@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.mariadb.jdbc.Connection;
 
 /**
  *
@@ -396,7 +395,7 @@ public class Peliculas extends javax.swing.JInternalFrame {
 
          if (id.isEmpty()) {
             
-            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Poner en Cartelera.");
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de la Pelicula que desee Sacar de Cartelera.");
         } else {
              
             darBaja();

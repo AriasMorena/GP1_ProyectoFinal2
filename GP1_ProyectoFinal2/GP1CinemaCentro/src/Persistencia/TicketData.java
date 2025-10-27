@@ -27,7 +27,7 @@ public class TicketData {
     public void generarTicket (Ticket ticket) {
         
         String sql = "INSERT INTO ticket_ compra (fechaCompra, fechaFuncion, monto, dni)" + "VALUES(?,?,?,?)";
-         
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.set
