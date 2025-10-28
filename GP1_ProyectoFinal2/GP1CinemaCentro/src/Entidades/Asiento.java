@@ -7,12 +7,12 @@ package Entidades;
  */
 public class Asiento {
     
-    private char fila;
+    private String fila;
     private int número;
     private boolean disponible;
     private Proyeccion proyeccion;
 
-    public Asiento(char fila, int número, boolean disponible, Proyeccion proyeccion) {
+    public Asiento(String fila, int número, boolean disponible, Proyeccion proyeccion) {
         this.fila = fila;
         this.número = número;
         this.disponible = disponible;
@@ -31,11 +31,11 @@ public class Asiento {
         this.proyeccion = proyeccion;
     }
 
-    public char getFila() {
+    public String getFila() {
         return fila;
     }
 
-    public void setFila(char fila) {
+    public void setFila(String fila) {
         this.fila = fila;
     }
 
