@@ -10,6 +10,8 @@ import Entidades.conexion;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -117,6 +119,37 @@ public class SalaData {
             
             JOptionPane.showMessageDialog(null, "Error al modificar la sala." + ex.getMessage());  
         }  
+    }
+    
+        public List<Sala>listarSala(){
+      
+        List<Sala>listarSalas = new ArrayList<>();
+        
+        String sql = "SELECT * FROM sala ";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+            
+                Sala salasCine = new Sala ();
+                
+                if (true) {
+                    
+                }
+                salasCine.setNroSala(rs.getInt("NroSala"));
+                salasCine.setApta3D(rs.getBoolean("apta3D"));
+                salasCine.setCapacidad(rs.getInt("capacidad"));
+                salasCine.setEstado(rs.getString("estado"));
+                listarSalas.add(salasCine);
+            }
+            ps.close();
+        } catch (SQLException ex) {          
+            
+            JOptionPane.showMessageDialog(null, "Error al listar las salas:" + ex.getMessage());
+        }
+      return listarSalas;  
     }
       
 }

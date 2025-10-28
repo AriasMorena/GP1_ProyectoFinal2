@@ -204,6 +204,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Sala"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCrearActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbBuscar">
       <Properties>
@@ -245,6 +248,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mostrar Salas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbMostrarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbSalir">
       <Properties>

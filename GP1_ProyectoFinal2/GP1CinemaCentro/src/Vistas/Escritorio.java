@@ -138,7 +138,7 @@ public class Escritorio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        Sala vistaS = new Sala ();
+        Salas vistaS = new Salas ();
         vistaS.setVisible(true);
         jdEscritorio.add(vistaS);
         jdEscritorio.moveToFront(vistaS);

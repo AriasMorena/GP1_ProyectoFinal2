@@ -7,12 +7,14 @@ package Vistas;
 import Persistencia.*;
 import javax.swing.table.DefaultTableModel;
 import Entidades.*;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lucio
  */
-public class Sala extends javax.swing.JInternalFrame {
+public class Salas extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo= new DefaultTableModel();
     SalaData salaD = new SalaData();
@@ -21,7 +23,7 @@ public class Sala extends javax.swing.JInternalFrame {
     /**
      * Creates new form Sala
      */
-    public Sala() {
+    public Salas() {
         initComponents();
         cabecera();
     }
@@ -99,6 +101,11 @@ public class Sala extends javax.swing.JInternalFrame {
         });
 
         jbCrear.setText("Crear Sala");
+        jbCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar Sala");
 
@@ -120,6 +127,11 @@ public class Sala extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtSalas);
 
         jbMostrar.setText("Mostrar Salas");
+        jbMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMostrarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +258,17 @@ public class Sala extends javax.swing.JInternalFrame {
         dispose ();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostrarActionPerformed
+        // TODO add your handling code here:
+        cargarPeliculas ();
+    }//GEN-LAST:event_jbMostrarActionPerformed
+
+    private void jbCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearActionPerformed
+        // TODO add your handling code here:
+        agregarSala();
+        limpiarCampos();
+    }//GEN-LAST:event_jbCrearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -274,7 +297,6 @@ public class Sala extends javax.swing.JInternalFrame {
     
     private void cabecera(){
         
-        modelo.addColumn("ID");
         modelo.addColumn("Numero de Sala");
         modelo.addColumn("Capacidad");
         modelo.addColumn("Apta 3D");
@@ -282,8 +304,84 @@ public class Sala extends javax.swing.JInternalFrame {
         jtSalas.setModel(modelo);
     }
     
+    private void agregarSala(){
+        
+        int nroSala;
+        int capacidad;
+        boolean apta;
+        String estado = "";
+        
+        try {
+            
+            nroSala = Integer.parseInt(jtNroSalas.getText());
+            capacidad = Integer.parseInt(jtCapacidad.getText());
+            
+        
+        
+            apta = jcApta3D.isSelected();
+        
+            if (jrbHabilitado.isSelected() == true) {
+            
+                estado = "Habilitado";
+            } else {
+            
+                if (jrbInhabilitado.isSelected() == true) {
+                
+                    estado = "Inhabilitado";
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "Es necesario elegir un estado");
+                }
+            }
+            
+            if (nroSala >0 && capacidad > 0 || (!jrbHabilitado.isSelected() && !jrbInhabilitado.isSelected())) {
+                
+                Sala sal = new Sala (nroSala,apta, capacidad, estado);
+                
+                salaD.crearSala(sal);
+            }
+        } catch (NumberFormatException x){
+            
+            JOptionPane.showMessageDialog(this, "Tiene que ingresar numeros enteros.");
+            return;
+        }
+    }
+    
+    private void cargarPeliculas (){
+            
+        List <Sala> lista = salaD.listarSala();
+        modelo.setRowCount(0);
+        String estado = "";
+        String apta= "";
+        
+
+        for (Sala s: lista) {
+            
+            if (s.isApta3D() == true) {
+                
+                apta = "Es apta";
+            } else {
+                
+                apta= "No es Apta";
+            }    
+            modelo.addRow(new Object []{
+                
+                
+                s.getNroSala(),
+                s.getCapacidad(),
+                apta,
+                s.getEstado()
+               
+            });
+        }
+
+    }
      private void limpiarCampos(){
         
-        
+        jtNroSalas.setText("");
+        jtCapacidad.setText("");
+        jcApta3D.setSelected(false);
+        jrbHabilitado.setSelected(false);
+        jrbInhabilitado.setSelected(false);
     }
 }
