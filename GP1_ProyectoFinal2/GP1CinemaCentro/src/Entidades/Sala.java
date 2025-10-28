@@ -7,12 +7,15 @@ package Entidades;
  */
 public class Sala {
     
+    private int idSala;
     private int nroSala;
     private boolean apta3D;
     private int capacidad;
     private String estado;
 
-    public Sala(int nroSala, boolean apta3D, int capacidad, String estado) {
+    public Sala(int idSala, int nroSala, boolean apta3D, int capacidad, String estado) {
+        
+        this.idSala = idSala;
         this.nroSala = nroSala;
         this.apta3D = apta3D;
         this.capacidad = capacidad;
@@ -22,6 +25,14 @@ public class Sala {
     public Sala() {
     }
 
+    public int getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(int idSala) {
+        this.idSala = idSala;
+    }
+    
     public int getNroSala() {
         return nroSala;
     }

@@ -26,6 +26,7 @@ public class Salas extends javax.swing.JInternalFrame {
     public Salas() {
         initComponents();
         cabecera();
+        jtId.setEditable(false);
     }
 
     /**
@@ -40,6 +41,7 @@ public class Salas extends javax.swing.JInternalFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jRadioButton2 = new javax.swing.JRadioButton();
         jButton4 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,10 +60,14 @@ public class Salas extends javax.swing.JInternalFrame {
         jtSalas = new javax.swing.JTable();
         jbMostrar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jtId = new javax.swing.JTextField();
 
         jRadioButton2.setText("jRadioButton2");
 
         jButton4.setText("Buscar Sala");
+
+        jLabel6.setText("jLabel6");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,10 +114,25 @@ public class Salas extends javax.swing.JInternalFrame {
         });
 
         jbBuscar.setText("Buscar Sala");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbModificar.setText("Modificar Sala");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar Sala");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
 
         jtSalas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,14 +161,13 @@ public class Salas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Id:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(268, 268, 268)
-                .addComponent(jbMostrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -164,7 +184,8 @@ public class Salas extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jcApta3D)
@@ -173,7 +194,8 @@ public class Salas extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jrbInhabilitado))
                                     .addComponent(jtNroSalas, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                    .addComponent(jtCapacidad)))
+                                    .addComponent(jtCapacidad)
+                                    .addComponent(jtId)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(174, 174, 174)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -186,6 +208,10 @@ public class Salas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSalir)
                 .addGap(46, 46, 46))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(jbMostrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,10 +238,14 @@ public class Salas extends javax.swing.JInternalFrame {
                     .addComponent(jrbHabilitado)
                     .addComponent(jrbInhabilitado)
                     .addComponent(jbBorrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jbMostrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSalir)
                 .addGap(21, 21, 21))
@@ -260,14 +290,69 @@ public class Salas extends javax.swing.JInternalFrame {
 
     private void jbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostrarActionPerformed
         // TODO add your handling code here:
-        cargarPeliculas ();
+        cargarS ();
     }//GEN-LAST:event_jbMostrarActionPerformed
 
     private void jbCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearActionPerformed
         // TODO add your handling code here:
         agregarSala();
         limpiarCampos();
+        jcApta3D.setText("Apta");
+        cargarS ();
     }//GEN-LAST:event_jbCrearActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        String id = jtId.getText();
+        
+         if (id.isEmpty()) {
+            
+            jtId.setEditable(true);
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee modificar");
+        } else {
+             
+            buscarSala(); 
+            limpiarCampos();
+            jtId.setEditable(false);
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+        String nro = jtId.getText();
+        
+        jtId.setEditable(true);
+        
+         if (nro.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee modificar");
+        } else {
+             
+            modificarSala();
+            limpiarCampos();
+            cargarS ();
+            jtId.setEditable(false);    
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        // TODO add your handling code here:
+        
+        String nro = jtId.getText();
+        
+        jtId.setEditable(true);
+        
+         if (nro.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee modificar");
+        } else {
+             
+            borrarSala();
+            limpiarCampos();
+            cargarS ();
+            jtId.setEditable(false);    
+        }
+    }//GEN-LAST:event_jbBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -278,6 +363,8 @@ public class Salas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBorrar;
@@ -290,6 +377,7 @@ public class Salas extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbHabilitado;
     private javax.swing.JRadioButton jrbInhabilitado;
     private javax.swing.JTextField jtCapacidad;
+    private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtNroSalas;
     private javax.swing.JTable jtSalas;
     // End of variables declaration//GEN-END:variables
@@ -297,6 +385,7 @@ public class Salas extends javax.swing.JInternalFrame {
     
     private void cabecera(){
         
+        modelo.addColumn("Id de Sala");
         modelo.addColumn("Numero de Sala");
         modelo.addColumn("Capacidad");
         modelo.addColumn("Apta 3D");
@@ -311,48 +400,166 @@ public class Salas extends javax.swing.JInternalFrame {
         boolean apta;
         String estado = "";
         
-        try {
+        if (jtNroSalas.getText().isEmpty() || jtCapacidad.getText().isEmpty() || (!jrbHabilitado.isSelected() && !jrbInhabilitado.isSelected())) {
             
-            nroSala = Integer.parseInt(jtNroSalas.getText());
-            capacidad = Integer.parseInt(jtCapacidad.getText());
+            JOptionPane.showMessageDialog(this, "Todos los Campos son obligatorio");
+        } else {
             
+            try {
+                nroSala = Integer.parseInt(jtNroSalas.getText());
+                capacidad = Integer.parseInt(jtCapacidad.getText());
+                apta = jcApta3D.isSelected();
         
-        
-            apta = jcApta3D.isSelected();
-        
-            if (jrbHabilitado.isSelected() == true) {
+                if (jrbHabilitado.isSelected() == true) {
             
-                estado = "Habilitado";
-            } else {
-            
-                if (jrbInhabilitado.isSelected() == true) {
-                
-                    estado = "Inhabilitado";
+                    estado = "Habilitado";
                 } else {
+            
+                    if (jrbInhabilitado.isSelected() == true) {
                 
-                    JOptionPane.showMessageDialog(this, "Es necesario elegir un estado");
+                        estado = "Inhabilitado";
+                    } else {
+                
+                        JOptionPane.showMessageDialog(this, "Es necesario elegir un estado");
+                    }
+                }
+            
+                Sala sal = new Sala(0 , nroSala, apta, capacidad, estado);
+            
+                salaD.crearSala(sal);
+            
+                } catch (NumberFormatException x){
+                
+                    JOptionPane.showMessageDialog(this, "Numero de Formato Incorrecto.");
+                    return;               
                 }
             }
+        }
+    
+    private void buscarSala(){
+                
+        modelo.setRowCount(0);
+        
+        int nro;
+        String apta = "";
+        
+        try {
+  
+            nro = Integer.parseInt(jtId.getText());
             
-            if (nroSala >0 && capacidad > 0 || (!jrbHabilitado.isSelected() && !jrbInhabilitado.isSelected())) {
+            if (salaD.buscarSala(nro) != null) {
+               
+                Sala s = salaD.buscarSala(nro);
+              
+                if (s.isApta3D() == true) {
                 
-                Sala sal = new Sala (nroSala,apta, capacidad, estado);
+                    apta = "Es apta";
+                } else {
                 
-                salaD.crearSala(sal);
+                    apta= "No es Apta";
+                }   
+            
+                if (s != null) {
+                
+                    modelo.addRow(new Object []{
+                    
+                        s.getIdSala(),
+                        s.getNroSala(),
+                        s.getCapacidad(),
+                        apta,
+                        s.getEstado()
+                    });
+                }
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el Numero de sala indicado");
             }
+        
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El numero de sala debe ser un numero entero.");
+            return;
+        }   
+    }
+    
+    private void modificarSala(){
+        
+        int id;
+        
+        try{
+            id = Integer.parseInt(jtId.getText());            
+            int nro = Integer.parseInt(jtNroSalas.getText());
+            int cap = Integer.parseInt(jtCapacidad.getText());
+            boolean apta = jcApta3D.isSelected();
+            String estado = "";
+            
+            if (jrbHabilitado.isSelected() == true) {
+            
+                    estado = "Habilitado";
+                } else {
+            
+                    if (jrbInhabilitado.isSelected() == true) {
+                
+                        estado = "Inhabilitado";
+                    } else {
+                
+                        JOptionPane.showMessageDialog(this, "Es necesario elegir un estado");
+                    }
+                }
+            
+            if (salaD.buscarSala(id) != null) {
+                
+                Sala sal2 = new Sala(id, nro, apta, cap, estado);
+                
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Modificar la Sala de ID: " + jtId.getText() + "?" , 
+                        " Confirmar Actualizacion:", JOptionPane.YES_NO_OPTION);
+        
+                if (confirmar == JOptionPane.YES_OPTION) {
+                
+                    salaD.modificarSala(sal2);           
+                }
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado.");
+            }
+                    
         } catch (NumberFormatException x){
             
-            JOptionPane.showMessageDialog(this, "Tiene que ingresar numeros enteros.");
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
             return;
         }
     }
     
-    private void cargarPeliculas (){
+    private void borrarSala(){
+        
+        int id;
+        
+        try {
+            
+            id = Integer.parseInt(jtId.getText());
+            
+            if (salaD.buscarSala(id) != null) {
+                
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la sala: " +jtId.getText() + "?" ,
+                        " Confirmar el Borrado: ", JOptionPane.YES_NO_OPTION);
+                
+                if (confirmar == JOptionPane.YES_OPTION) {
+                    
+                    salaD.borrarSala(id);
+                }          
+            }
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");   
+            return;
+        }
+    }
+    
+    private void cargarS (){
             
         List <Sala> lista = salaD.listarSala();
         modelo.setRowCount(0);
-        String estado = "";
-        String apta= "";
+        String apta;
         
 
         for (Sala s: lista) {
@@ -366,7 +573,7 @@ public class Salas extends javax.swing.JInternalFrame {
             }    
             modelo.addRow(new Object []{
                 
-                
+                s.getIdSala(),
                 s.getNroSala(),
                 s.getCapacidad(),
                 apta,
@@ -374,10 +581,10 @@ public class Salas extends javax.swing.JInternalFrame {
                
             });
         }
-
     }
      private void limpiarCampos(){
-        
+         
+        jtId.setText("");
         jtNroSalas.setText("");
         jtCapacidad.setText("");
         jcApta3D.setSelected(false);

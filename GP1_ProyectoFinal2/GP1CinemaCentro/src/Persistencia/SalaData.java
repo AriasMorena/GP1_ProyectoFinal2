@@ -46,25 +46,31 @@ public class SalaData {
             
         } catch (SQLException ex) {
          
-            JOptionPane.showMessageDialog(null, "Error al crear la sala." + ex.getMessage());
-        }  
-    }
+            if (ex.getErrorCode() == 1062) {
+                
+                JOptionPane.showMessageDialog(null, "Ya existe una sala con ese Numero");
+            } else {
+            
+                JOptionPane.showMessageDialog(null, "Error al crear la sala." + ex.getMessage());
+            }
+        }
+}
     
-    public Sala buscarSala (int id_sala){
+    public Sala buscarSala (int nro){
         
         Sala sala = null;
         
-        String sql = "SELECT * FROM sala WHERE id_sala = ?";
+        String sql = "SELECT * FROM sala WHERE id_Sala = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id_sala);
+            ps.setInt(1, nro);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()){
                 
                 sala = new Sala();
-                
+                sala.setIdSala(rs.getInt("id_Sala"));
                 sala.setNroSala(rs.getInt("NroSala"));
                 sala.setApta3D(rs.getBoolean("apta3D"));
                 sala.setCapacidad(rs.getInt("capacidad"));
@@ -98,14 +104,18 @@ public class SalaData {
     
     }
     
-    public void modificarSala (int id_sala){
+    public void modificarSala (Sala sala){
         
-        String sql = "UPDATE sala SET NroSala = ?, apta3D = ?, capacidad = ?, estado = ? WHERE id_sala = ?";
+        String sql = "UPDATE sala SET NroSala = ?, apta3D = ?, capacidad = ?, estado = ? WHERE id_Sala = ?";
         
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id_sala);
+            ps.setInt(1, sala.getNroSala());
+            ps.setBoolean(2, sala.isApta3D());
+            ps.setInt(3, sala.getCapacidad());
+            ps.setString(4, sala.getEstado());
+            ps.setInt(5, sala.getIdSala());
             
             int filas = ps.executeUpdate();
             
@@ -138,6 +148,7 @@ public class SalaData {
                 if (true) {
                     
                 }
+                salasCine.setIdSala(rs.getInt("id_Sala"));
                 salasCine.setNroSala(rs.getInt("NroSala"));
                 salasCine.setApta3D(rs.getBoolean("apta3D"));
                 salasCine.setCapacidad(rs.getInt("capacidad"));
