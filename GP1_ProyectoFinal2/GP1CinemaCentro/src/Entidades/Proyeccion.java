@@ -8,6 +8,7 @@ import java.sql.*;
  */
 public class Proyeccion {
     
+    private int idProyeccion;
     private String idioma;
     private boolean es3D;
     private boolean subtitulada;
@@ -26,8 +27,15 @@ public class Proyeccion {
 
     public Proyeccion() {
     }
-    
 
+    public int getIdProyeccion() {
+        return idProyeccion;
+    }
+
+    public void setIdProyeccion(int idProyeccion) {
+        this.idProyeccion = idProyeccion;
+    }
+    
     public String getIdioma() {
         return idioma;
     }
