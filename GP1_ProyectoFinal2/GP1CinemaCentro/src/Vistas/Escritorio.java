@@ -34,6 +34,8 @@ public class Escritorio extends javax.swing.JFrame {
         jmiPelicula = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jmiSalas = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmiSalir = new javax.swing.JMenuItem();
 
@@ -78,6 +80,18 @@ public class Escritorio extends javax.swing.JFrame {
         jMenu1.add(jmiSalas);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Proyeccion");
+
+        jMenuItem1.setText("Proyecciones");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Salir");
 
@@ -144,6 +158,16 @@ public class Escritorio extends javax.swing.JFrame {
         jdEscritorio.moveToFront(vistaS);
     }//GEN-LAST:event_jmiSalasActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        Proyeccion vistaP = new Proyeccion ();
+        vistaP.setVisible(true);
+        jdEscritorio.add(vistaP);
+        jdEscritorio.moveToFront(vistaP);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,7 +206,9 @@ public class Escritorio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenu jmPelicula;
     private javax.swing.JMenuItem jmiPelicula;
