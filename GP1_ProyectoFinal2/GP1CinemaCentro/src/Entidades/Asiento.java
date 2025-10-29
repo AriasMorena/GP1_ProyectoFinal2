@@ -10,27 +10,26 @@ public class Asiento {
     private String fila;
     private int número;
     private boolean disponible;
-    private Proyeccion proyeccion;
+    private int idProyeccion;
 
-    public Asiento(String fila, int número, boolean disponible, Proyeccion proyeccion) {
+    public Asiento(String fila, int número, boolean disponible, int idProyeccion) {
         this.fila = fila;
         this.número = número;
         this.disponible = disponible;
-        this.proyeccion = proyeccion;
+        this.idProyeccion = idProyeccion;
     }
 
     public Asiento() {
     }
+
+    public int getIdProyeccion() {
+        return idProyeccion;
+    }
+
+    public void setIdProyeccion(int idProyeccion) {
+        this.idProyeccion = idProyeccion;
+    }
     
-
-    public Proyeccion getProyeccion() {
-        return proyeccion;
-    }
-
-    public void setProyeccion(Proyeccion proyeccion) {
-        this.proyeccion = proyeccion;
-    }
-
     public String getFila() {
         return fila;
     }
