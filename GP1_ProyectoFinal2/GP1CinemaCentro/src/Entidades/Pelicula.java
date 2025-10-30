@@ -116,6 +116,6 @@ public class Pelicula {
     }
     
   public String toString() {
-        return  "Título: " + titulo + "\nidPelicula"+ idPelicula + "\nDirector: " + director + "\nGénero: " + genero + "\nEstreno: " + estreno + "\nActores: " + actores;
+        return  "Título: " + titulo + " idPelicula"+ idPelicula ;
     }
 }

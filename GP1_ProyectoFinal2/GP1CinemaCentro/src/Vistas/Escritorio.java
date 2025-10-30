@@ -162,7 +162,7 @@ public class Escritorio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        Proyeccion vistaP = new Proyeccion ();
+        Proyecciones vistaP = new Proyecciones ();
         vistaP.setVisible(true);
         jdEscritorio.add(vistaP);
         jdEscritorio.moveToFront(vistaP);
