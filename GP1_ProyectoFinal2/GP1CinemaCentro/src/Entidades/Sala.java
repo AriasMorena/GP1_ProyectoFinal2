@@ -64,6 +64,12 @@ public class Sala {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return idSala + " Numero de Sala: " + nroSala ;
+    }
     
+        
     
 }

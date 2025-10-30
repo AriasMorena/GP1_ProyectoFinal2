@@ -9,6 +9,8 @@ import java.sql.*;
 public class Proyeccion {
     
     private int idProyeccion;
+    private Pelicula pelicula;
+    private Sala sala;
     private String idioma;
     private boolean es3D;
     private boolean subtitulada;
@@ -17,6 +19,7 @@ public class Proyeccion {
     private double precioLugar;
 
     public Proyeccion(String idioma, boolean es3D, boolean subtitulada, Time horaInicio, Time horaFin, double precioLugar) {
+
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;
@@ -24,6 +27,8 @@ public class Proyeccion {
         this.horaFin = horaFin;
         this.precioLugar = precioLugar;
     }
+
+    
 
     public Proyeccion() {
     }
@@ -35,6 +40,24 @@ public class Proyeccion {
     public void setIdProyeccion(int idProyeccion) {
         this.idProyeccion = idProyeccion;
     }
+
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+    
+    
     
     public String getIdioma() {
         return idioma;

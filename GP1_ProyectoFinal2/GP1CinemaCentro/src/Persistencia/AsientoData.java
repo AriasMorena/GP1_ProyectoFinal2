@@ -33,10 +33,10 @@ public class AsientoData {
     
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setInt(1, asiento.getFila());
+                ps.setString(1, asiento.getFila());
                 ps.setInt(2, asiento.getNúmero());
                 ps.setBoolean(3, asiento.isDisponible());
-                ps.setInt(4, asiento.getProyeccion().getIdProyeccion());
+                ps.setInt(4, asiento.getIdProyeccion());
                 int exito = ps.executeUpdate();
                 
                 if (exito == 1){
@@ -85,10 +85,10 @@ public class AsientoData {
         
             asiento = new Asiento();
        
-            asiento.setFila(rs.getInt("fila"));
+            asiento.setFila(rs.getString("fila"));
             asiento.setNúmero(rs.getInt("numero"));
             asiento.setDisponible(rs.getBoolean("estado"));
-            asiento.setProyeccion(rs.getInt("id_proyeccion"));      
+            asiento.setIdProyeccion(rs.getInt("id_proyeccion"));
         }
            ps.close();
         } catch (SQLException ex){
@@ -134,12 +134,13 @@ public class AsientoData {
                 
                     if (true){
                         
-                    }                  
+                    }                 
                     asientos.setFila(rs.getString("fila"));
                     asientos.setNúmero(rs.getInt("numero"));
                     asientos.setDisponible(rs.getBoolean("estado"));
-                    asientos.setProyeccion(rs.getInt("id_proyeccion"));
+                    asientos.setIdProyeccion(rs.getInt("id_proyeccion"));
                     listarAsientos.add(asientos);
+                
                 }
                 ps.close();
             } catch (SQLException ex) {

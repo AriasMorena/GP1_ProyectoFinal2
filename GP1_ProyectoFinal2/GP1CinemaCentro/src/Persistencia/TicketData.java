@@ -23,7 +23,7 @@ public class TicketData {
     
         con = conexion.getConexion();    
     }
-    
+    /*
     public void generarTicket (Ticket ticket) {
         
         String sql = "INSERT INTO ticket_ compra (fechaCompra, fechaFuncion, monto, dni)" + "VALUES(?,?,?,?)";
@@ -38,4 +38,5 @@ public class TicketData {
             
         }
     }
+*/
 }
