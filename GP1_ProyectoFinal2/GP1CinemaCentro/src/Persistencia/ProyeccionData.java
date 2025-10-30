@@ -156,8 +156,22 @@ public class ProyeccionData {
     public Proyeccion buscarProyeccion (int id_proyeccion) {
     
         Proyeccion proyeccion = null;
+        Pelicula peli = null;
+        Sala sala = null;
         
-        String sql = "SELECT * FROM proyeccion WHERE id_proyeccion = ?";
+         String sql = "SELECT p.id_proyeccion AS idProyeccion , "
+                + "s.NroSala , "
+                + "pe.titulo , "
+                + "p.idioma , "
+                + "p.es3D , "
+                + "p.subtitulada , "
+                + "p.horaInicio , "
+                + "p.horaFin , "
+                + "p.precio "
+                + "FROM proyeccion p "
+                + "JOIN sala s ON p.id_sala = s.id_Sala "
+                + "JOIN pelicula pe ON pe.id_pelicula = p.id_pelicula "
+                + "WHERE p.id_proyeccion = ? ";
         
        try {
            PreparedStatement ps = con.prepareStatement(sql);
@@ -166,14 +180,25 @@ public class ProyeccionData {
            
             if (rs.next()){
            
-               proyeccion = new Proyeccion();
-               
-               proyeccion.setIdioma(rs.getString("idioma"));
-               proyeccion.setEs3D(rs.getBoolean("es3D"));
-               proyeccion.setSubtitulada(rs.getBoolean("subtitulada"));
-               proyeccion.setHoraInicio(rs.getTime("horaInicio"));
-               proyeccion.setHoraFin(rs.getTime("horaFin"));
-               proyeccion.setPrecioLugar(rs.getDouble("precio"));
+                proyeccion = new Proyeccion ();
+                proyeccion.setIdProyeccion(rs.getInt("idProyeccion"));
+                
+                peli = new Pelicula();
+                peli.setTitulo(rs.getString("titulo"));
+             
+                sala = new Sala();
+                sala.setNroSala(rs.getInt("nroSala"));
+             
+
+                proyeccion.setSala(sala);
+                proyeccion.setPelicula(peli);
+                proyeccion.setIdioma(rs.getString("idioma"));
+                proyeccion.setSubtitulada(rs.getBoolean("subtitulada"));
+                proyeccion.setEs3D(rs.getBoolean("es3D"));
+                proyeccion.setHoraInicio(rs.getTime("horaInicio"));
+                proyeccion.setHoraFin(rs.getTime("horaFin"));
+                proyeccion.setPrecioLugar(rs.getDouble("precio"));
+             
            }
             ps.close();
            
