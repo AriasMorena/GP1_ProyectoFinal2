@@ -20,6 +20,10 @@ public class Ticket {
         this.precio = precio;
     }
 
+    public Ticket() {
+    }
+    
+
     public int getCodigoVenta() {
         return codigoVenta;
     }
