@@ -17,8 +17,9 @@ public class Proyeccion {
     private Time horaInicio;
     private Time horaFin;
     private double precioLugar;
+    private boolean estado;
 
-    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, Time horaInicio, Time horaFin, double precioLugar) {
+    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, Time horaInicio, Time horaFin, double precioLugar, boolean estado) {
 
         this.idioma = idioma;
         this.es3D = es3D;
@@ -26,6 +27,7 @@ public class Proyeccion {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.precioLugar = precioLugar;
+        this.estado = estado;
     }
 
     
@@ -106,6 +108,12 @@ public class Proyeccion {
     public void setPrecioLugar(double precioLugar) {
         this.precioLugar = precioLugar;
     }
-    
-    
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 }

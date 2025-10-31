@@ -48,13 +48,8 @@
                                       <Component id="jtIdiomas" max="32767" attributes="0"/>
                                       <Component id="jtPrecio" min="-2" pref="300" max="-2" attributes="0"/>
                                       <Component id="jtIdPro" min="-2" pref="300" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jrbApto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jrSubtitulada" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jrbApto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jrSubtitulada" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jsHoraInicio" min="-2" max="-2" attributes="0"/>
@@ -359,6 +354,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbMostrar">
       <Properties>

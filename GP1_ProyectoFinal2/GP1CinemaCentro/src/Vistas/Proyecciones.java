@@ -17,8 +17,7 @@ import java.sql.Time;
  */
 public class Proyecciones extends javax.swing.JInternalFrame {
  private DefaultTableModel modelo= new DefaultTableModel();
-    PeliculaData peliD = new PeliculaData();
-    SalaData salaD = new SalaData ();
+
     ProyeccionData proyeD = new ProyeccionData();
 
     public Proyecciones() {
@@ -160,6 +159,11 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtProyecciones);
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jbMostrar.setText("Mostrar");
         jbMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -199,11 +203,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                                         .addComponent(jtIdiomas)
                                         .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jrbApto)
-                                                .addComponent(jrSubtitulada))
-                                            .addGap(11, 11, 11)))
+                                        .addComponent(jrbApto)
+                                        .addComponent(jrSubtitulada))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jsHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -291,10 +292,26 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         cargarProyeccion();
         limpiarCampos();
+        mostraPro();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+       String nro = jtIdPro.getText();
+        
+        jtIdPro.setEditable(true);
+        
+         if (nro.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee modificar");
+        } else {
+             
+            elimarProy();
+            limpiarCampos();
+            jtIdPro.setEditable(false);    
+        }
+         
+         mostraPro();    
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jcbSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSalasActionPerformed
@@ -323,6 +340,11 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        
+        dispose ();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -369,6 +391,7 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         
         boolean apto = false; 
         boolean sub = false;
+        boolean estado= true;
         
         if (jrbApto.isSelected() == true) {
             
@@ -392,7 +415,7 @@ public class Proyecciones extends javax.swing.JInternalFrame {
 
             } else {
                 
-                Proyeccion proy = new Proyeccion(idiomas, apto, sub, horaI, horaF, precio);
+                Proyeccion proy = new Proyeccion(idiomas, apto, sub, horaI, horaF, precio, estado);
                 
                 proyeD.guardarProyeccion(proy, idPeli, idSala);
                 
@@ -409,25 +432,10 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         
         int id;
-        String apto; 
-        String sub;
-        
-        if (jrbApto.isSelected() == true) {
-            
-            apto = "Es Apto";
-        } else {
-            
-            apto = "No es Apto para 3D";
-        }
-        
-        if (jrSubtitulada.isSelected() == true) {
-            
-            sub = "Subtitulada";
-        } else {
-            
-            sub = "No es Subtitulada";
-        }
-        
+        String apto = ""; 
+        String sub = "";
+        String estado= "";
+       
         try {
   
             id = Integer.parseInt(jtIdPro.getText());
@@ -437,6 +445,30 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                 Proyeccion pro = proyeD.buscarProyeccion(id);
             
                 if (pro != null) {
+                    
+                    if (pro.isEs3D() == true) {
+                        
+                        apto = "Apta para 3D";
+                    } else {
+                
+                        apto = "No es Apta para 3D";
+                    }
+                
+                    if (pro.isSubtitulada() == true) {
+                        
+                        sub = "Subtitulada";
+                    } else {
+                
+                        sub = "No esta Subtitulada";
+                    }
+                    
+                    if(pro.isEstado() == true){
+                        
+                        estado = "Habilitado";
+                    } else {
+                        
+                        estado = "Inhabilitado";
+                    }
                 
                     modelo.addRow(new Object []{
                     
@@ -448,7 +480,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                         pro.getIdioma(),
                         pro.getHoraInicio(),
                         pro.getHoraFin(),
-                        pro.getPrecioLugar()
+                        pro.getPrecioLugar(),
+                        estado
                     });
                 }
             } else {
@@ -467,7 +500,7 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         
         List <Proyeccion> lista = proyeD.listarProyecciones();
         modelo.setRowCount(0);
-        String apta, sub;
+        String apta, sub, estado;
         
         for (Proyeccion p: lista) {
             
@@ -487,6 +520,14 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                 sub = "No esta Subtitulada";
             }
             
+            if(p.isEstado() == true){
+                        
+                estado = "Habilitado";
+            } else {
+                        
+                estado = "Inhabilitado";
+            }
+            
             modelo.addRow(new Object []{
                 
                p.getIdProyeccion(),
@@ -497,8 +538,34 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                 p.getIdioma(),
                 p.getHoraInicio(),
                 p.getHoraFin(),
-                p.getPrecioLugar()
+                p.getPrecioLugar(),
+                estado
             });
+        }
+    }
+    
+    private void elimarProy (){
+         
+        int id;
+        
+        try {
+            
+            id = Integer.parseInt(jtIdPro.getText());
+            
+            if (proyeD.buscarProyeccion(id) != null) {
+                
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la Proyeccion: " +jtIdPro.getText() + "?" ,
+                        " Confirmar el Borrado: ", JOptionPane.YES_NO_OPTION);
+                
+                if (confirmar == JOptionPane.YES_OPTION) {
+                    
+                    proyeD.borrarProyeccion(id);
+                }          
+            }
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");   
+            return;
         }
     }
     
@@ -512,6 +579,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
     
     private void cargarCombosP(){
         jcbPeliculas.removeAllItems();
+        PeliculaData peliD = new PeliculaData();
+
         
         for (Pelicula p: peliD.listarPeliculas()) {
             
@@ -521,6 +590,7 @@ public class Proyecciones extends javax.swing.JInternalFrame {
     
      private void cargarCombosS(){
         jcbSalas.removeAllItems();
+        SalaData salaD = new SalaData ();
         
         for (Sala s: salaD.listarSala()) {
             
@@ -538,20 +608,18 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         modelo.addColumn("Hora de Inicio");
         modelo.addColumn("Hora de Finalizacion");
         modelo.addColumn("Precio");
+        modelo.addColumn("Estado");
         
         jtProyecciones.setModel(modelo);
     }
     
      private void limpiarCampos(){
          
-            jcbPeliculas.setSelectedIndex(-1);
-            jcbSalas.setSelectedIndex(-1);
-            
             jsHoraInicio.setValue(new java.util.Date());
             jsHoraFin.setValue(new java.util.Date());
             
             jrSubtitulada.setSelected(false);
-            jrSubtitulada.setSelected(false);
+            jrbApto.setSelected(false);
             
             jtIdPro.setText("");
             jtPrecio.setText("");

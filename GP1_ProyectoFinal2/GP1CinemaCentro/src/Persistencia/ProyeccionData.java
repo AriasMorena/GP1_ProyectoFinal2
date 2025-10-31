@@ -30,7 +30,7 @@ public class ProyeccionData {
     
     public void guardarProyeccion (Proyeccion proyeccion, int id_pelicula, int id_sala){
        
-       String sql = "INSERT INTO proyeccion (id_pelicula, id_sala, idioma, es3D, subtitulada, horaInicio, horaFin, precio)" + "VALUES (?,?,?,?,?,?,?,?)";
+       String sql = "INSERT INTO proyeccion (id_pelicula, id_sala, idioma, es3D, subtitulada, horaInicio, horaFin, precio, estado)" + "VALUES (?,?,?,?,?,?,?,?,?)";
        
        try {
            PreparedStatement ps = con.prepareStatement(sql);
@@ -42,6 +42,7 @@ public class ProyeccionData {
            ps.setTime(6, proyeccion.getHoraInicio());
            ps.setTime(7, proyeccion.getHoraFin());
            ps.setDouble(8, proyeccion.getPrecioLugar());
+           ps.setBoolean(9, proyeccion.isEstado());
            int exito = ps.executeUpdate();
            
            if (exito == 1){
@@ -76,20 +77,22 @@ public class ProyeccionData {
        
     }
     
-    public void borrarProyeccion (int id_pelicula, int id_sala){
+    public void borrarProyeccion (int id_proyeccion){
         
-        String sql = "DELETE FROM proyeccion WHERE id_pelicula = ? AND id_sala = ?";
+        String sql = "DELETE FROM proyeccion WHERE id_proyeccion = ?";
     
         try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id_pelicula);
-        ps.setInt(2, id_sala);
+        ps.setInt(1, id_proyeccion);
         
         int exito = ps.executeUpdate();
         
         if (exito == 1){
         
             JOptionPane.showMessageDialog(null, "Proyeccion borrada exitosamente.");
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "No se encontro una proyeccion con ese ID");
         }
         ps.close();
         
@@ -111,7 +114,8 @@ public class ProyeccionData {
                 + "p.subtitulada , "
                 + "p.horaInicio , "
                 + "p.horaFin , "
-                + "p.precio "
+                + "p.precio , "
+                + "p.estado "
                 + "FROM proyeccion p "
                 + "JOIN sala s ON p.id_sala = s.id_Sala "
                 + "JOIN pelicula pe ON pe.id_pelicula = p.id_pelicula";
@@ -138,6 +142,7 @@ public class ProyeccionData {
              proy.setHoraInicio(rs.getTime("horaInicio"));
              proy.setHoraFin(rs.getTime("horaFin"));
              proy.setPrecioLugar(rs.getDouble("precio"));
+             proy.setEstado(rs.getBoolean("estado"));
              
              Proyecciones.add(proy);
              
@@ -167,7 +172,8 @@ public class ProyeccionData {
                 + "p.subtitulada , "
                 + "p.horaInicio , "
                 + "p.horaFin , "
-                + "p.precio "
+                + "p.precio , "
+                + "p.estado "
                 + "FROM proyeccion p "
                 + "JOIN sala s ON p.id_sala = s.id_Sala "
                 + "JOIN pelicula pe ON pe.id_pelicula = p.id_pelicula "
@@ -198,6 +204,7 @@ public class ProyeccionData {
                 proyeccion.setHoraInicio(rs.getTime("horaInicio"));
                 proyeccion.setHoraFin(rs.getTime("horaFin"));
                 proyeccion.setPrecioLugar(rs.getDouble("precio"));
+                proyeccion.setEstado(rs.getBoolean("estado"));
              
            }
             ps.close();
