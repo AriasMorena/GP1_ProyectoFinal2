@@ -22,6 +22,9 @@ public class Comprador {
         this.medioPago = medioPago;
     }
 
+    public Comprador() {
+    }
+
     public int getDni() {
         return dni;
     }
