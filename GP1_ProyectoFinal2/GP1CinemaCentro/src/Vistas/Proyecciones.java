@@ -25,6 +25,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         cabecera();
         cargarCombosP();
         cargarCombosS();
+        jcbPeliculas.setSelectedIndex(-1);
+        jcbSalas.setSelectedIndex(-1);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -57,6 +59,10 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         jtProyecciones = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
         jbMostrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jrNoApto = new javax.swing.JRadioButton();
+        jrNoSubti = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -115,6 +121,7 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         jsHoraInicio.setModel(new javax.swing.SpinnerDateModel());
         jsHoraInicio.setToolTipText("");
         jsHoraInicio.setEditor(new javax.swing.JSpinner.DateEditor(jsHoraInicio, " HH:mm"));
+        jsHoraInicio.setOpaque(true);
 
         jsHoraFin.setModel(new javax.swing.SpinnerDateModel());
         jsHoraFin.setEditor(new javax.swing.JSpinner.DateEditor(jsHoraFin, "HH:mm"));
@@ -144,6 +151,11 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         });
 
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jtProyecciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,61 +184,86 @@ public class Proyecciones extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Habilitar");
+
+        jButton2.setText("Inhabilitar");
+
+        jrNoApto.setText("No Apto para 3D");
+        jrNoApto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrNoAptoActionPerformed(evt);
+            }
+        });
+
+        jrNoSubti.setText("No Subtitulada");
+        jrNoSubti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrNoSubtiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(273, Short.MAX_VALUE)
+                .addContainerGap(174, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(429, 429, 429))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbGuardar)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jcbSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jcbPeliculas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtIdiomas)
-                                        .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jbBuscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jcbSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jcbPeliculas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtIdiomas)
+                                .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jrbApto)
                                         .addComponent(jrSubtitulada))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jsHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jsHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(198, 198, 198))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(200, 200, 200))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbGuardar)
-                                .addGap(51, 51, 51)
-                                .addComponent(jbBuscar)
-                                .addGap(76, 76, 76)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jrNoSubti)
+                                        .addComponent(jrNoApto))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jsHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jsHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbEliminar)
+                                .addGap(55, 55, 55)
+                                .addComponent(jbModificar)
                                 .addGap(51, 51, 51)
-                                .addComponent(jbModificar)))
-                        .addGap(231, 231, 231))))
+                                .addComponent(jButton1)
+                                .addGap(41, 41, 41)
+                                .addComponent(jButton2)))
+                        .addGap(98, 98, 98))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(434, 434, 434))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,11 +284,13 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jrbApto))
+                    .addComponent(jrbApto)
+                    .addComponent(jrNoApto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jrSubtitulada))
+                    .addComponent(jrSubtitulada)
+                    .addComponent(jrNoSubti))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -270,15 +309,17 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar)
                     .addComponent(jbEliminar)
+                    .addComponent(jbGuardar)
+                    .addComponent(jButton1)
                     .addComponent(jbBuscar)
-                    .addComponent(jbGuardar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton2))
+                .addGap(26, 26, 26)
                 .addComponent(jbMostrar)
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbSalir)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -321,12 +362,18 @@ public class Proyecciones extends javax.swing.JInternalFrame {
 
     private void jrbAptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAptoActionPerformed
         // TODO add your handling code here:
-        
+        if (jrbApto.isSelected()) {
+            
+            jrNoApto.setSelected(false);
+        }
     }//GEN-LAST:event_jrbAptoActionPerformed
 
     private void jrSubtituladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrSubtituladaActionPerformed
         // TODO add your handling code here:
-        
+        if (jrSubtitulada.isSelected()) {
+            
+            jrNoSubti.setSelected(false);
+        }
     }//GEN-LAST:event_jrSubtituladaActionPerformed
 
     private void jbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostrarActionPerformed
@@ -346,7 +393,46 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         dispose ();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jrNoSubtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoSubtiActionPerformed
+        // TODO add your handling code here:
+        if (jrNoSubti.isSelected()) {
+            
+            jrSubtitulada.setSelected(false);
+        }
+    }//GEN-LAST:event_jrNoSubtiActionPerformed
+
+    private void jrNoAptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoAptoActionPerformed
+        // TODO add your handling code here:
+        if (jrNoApto.isSelected()) {
+            
+            jrbApto.setSelected(false);
+        }
+    }//GEN-LAST:event_jrNoAptoActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        String nro = jtIdPro.getText();
+        
+        jtIdPro.setEditable(true);
+        
+         if (nro.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee modificar");
+        } else {
+             
+            modificarProy();
+            limpiarCampos();
+            jtIdPro.setEditable(false);    
+        }
+         
+         mostraPro();   
+    }//GEN-LAST:event_jbModificarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -366,6 +452,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Object> jcbPeliculas;
     private javax.swing.JComboBox<Object> jcbSalas;
+    private javax.swing.JRadioButton jrNoApto;
+    private javax.swing.JRadioButton jrNoSubti;
     private javax.swing.JRadioButton jrSubtitulada;
     private javax.swing.JRadioButton jrbApto;
     private javax.swing.JSpinner jsHoraFin;
@@ -396,28 +484,44 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         if (jrbApto.isSelected() == true) {
             
             apto = true;
-        } 
+        } else {
+            
+            if (jrNoApto.isSelected() == true) {
+                
+                apto = false;
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+            }
+        }
         
         if (jrSubtitulada.isSelected() == true) {
             
             sub = true;
+        } else {
+            
+            if (jrNoSubti.isSelected() == true) {
+                
+                sub = false;
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+            }
         }
         try{
             
-            int idPeli = peliSele.getIdPelicula();
-            int idSala = salaSele.getIdSala();
             
             double precio = Double.parseDouble(jtPrecio.getText());    
             
-            if (horaInicio == null || horaFin == null || idiomas.isEmpty() || precio == 0 || idPeli == 0 || idSala == 0 ) {
+            if (horaInicio == null || horaFin == null || idiomas.isEmpty() || precio == 0 || peliSele == null || salaSele == null ) {
                 
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios");
 
             } else {
                 
-                Proyeccion proy = new Proyeccion(idiomas, apto, sub, horaI, horaF, precio, estado);
+                Proyeccion proy = new Proyeccion( 0 ,peliSele, salaSele, idiomas, apto, sub, horaI, horaF, precio, estado);
                 
-                proyeD.guardarProyeccion(proy, idPeli, idSala);
+                proyeD.guardarProyeccion(proy, peliSele.getIdPelicula(), salaSele.getIdSala());
                 
                 
             }
@@ -569,6 +673,83 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         }
     }
     
+    private void modificarProy(){
+        
+        try{
+        int id = Integer.parseInt(jtIdPro.getText());
+        
+        double precio = Double.parseDouble(jtPrecio.getText());
+
+        Pelicula peliS = (Pelicula) jcbPeliculas.getSelectedItem();
+        Sala salaS = (Sala) jcbSalas.getSelectedItem();
+        
+        Date horaInicio = (Date) jsHoraInicio.getValue();
+        java.sql.Time horaI = new java.sql.Time(horaInicio.getTime());
+        
+        Date horaFin = (Date) jsHoraFin.getValue();
+        java.sql.Time horaF = new java.sql.Time(horaFin.getTime());
+        
+        String idiomas = jtIdiomas.getText();
+        
+        boolean apto = false; 
+        boolean sub = false;
+        boolean estado = true;
+        
+        if (jrbApto.isSelected() == true) {
+            
+            apto = true;
+        } else {
+            
+            if (jrNoApto.isSelected() == true) {
+                
+                apto = false;
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+            }
+        }
+       
+        if (jrSubtitulada.isSelected() == true) {
+            
+            sub = true;
+        } else {
+            
+            if (jrNoSubti.isSelected() == true) {
+                
+                sub = false;
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+            }
+        }
+        
+        Proyeccion proyExistente = proyeD.buscarProyeccion(id);
+
+        if (proyExistente != null) {
+              
+            Proyeccion proy2 = new Proyeccion(id, peliS, salaS, idiomas , apto, sub, horaI, horaF, precio, estado);
+
+            int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Modificar la Proyeccion de ID: " + id + "?" , 
+                        " Confirmar Actualizacion:", JOptionPane.YES_NO_OPTION);
+        
+            if (confirmar == JOptionPane.YES_OPTION) {
+                
+                proyeD.actualizarProyeccion(proy2);           
+            }
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el id .");
+            }       
+        } catch (NumberFormatException x){
+            
+            JOptionPane.showMessageDialog(this, "Verifique que el ID y el precio sean válidos");
+        }catch (Exception x){
+            
+            JOptionPane.showMessageDialog(this, "Error al modificar: " + x.getMessage());
+        }
+    }
+    
+    
     
     
     
@@ -615,11 +796,17 @@ public class Proyecciones extends javax.swing.JInternalFrame {
     
      private void limpiarCampos(){
          
+            jcbPeliculas.setSelectedIndex(-1);
+            jcbSalas.setSelectedIndex(-1);
+         
             jsHoraInicio.setValue(new java.util.Date());
             jsHoraFin.setValue(new java.util.Date());
             
             jrSubtitulada.setSelected(false);
             jrbApto.setSelected(false);
+            
+            jrNoSubti.setSelected(false);
+            jrNoApto.setSelected(false);
             
             jtIdPro.setText("");
             jtPrecio.setText("");

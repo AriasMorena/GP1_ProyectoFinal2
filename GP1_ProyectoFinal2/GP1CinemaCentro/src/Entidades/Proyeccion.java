@@ -19,8 +19,10 @@ public class Proyeccion {
     private double precioLugar;
     private boolean estado;
 
-    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, Time horaInicio, Time horaFin, double precioLugar, boolean estado) {
+    public Proyeccion(int idProyeccion, Pelicula pelicula, Sala sala,String idioma, boolean es3D, boolean subtitulada, Time horaInicio, Time horaFin, double precioLugar, boolean estado) {
 
+        this.pelicula = pelicula;
+        this.sala = sala;
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;

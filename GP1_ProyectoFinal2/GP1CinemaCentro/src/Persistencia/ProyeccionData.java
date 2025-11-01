@@ -28,14 +28,14 @@ public class ProyeccionData {
        con = conexion.getConexion();
    }
     
-    public void guardarProyeccion (Proyeccion proyeccion, int id_pelicula, int id_sala){
+    public void guardarProyeccion (Proyeccion proyeccion,  int idPeli, int idSala){
        
        String sql = "INSERT INTO proyeccion (id_pelicula, id_sala, idioma, es3D, subtitulada, horaInicio, horaFin, precio, estado)" + "VALUES (?,?,?,?,?,?,?,?,?)";
        
        try {
            PreparedStatement ps = con.prepareStatement(sql);
-           ps.setInt(1, id_pelicula);
-           ps.setInt(2, id_sala);
+           ps.setInt(1, idPeli);
+           ps.setInt(2, idSala);
            ps.setString(3, proyeccion.getIdioma());
            ps.setBoolean(4, proyeccion.isEs3D());
            ps.setBoolean(5, proyeccion.isSubtitulada());
@@ -45,29 +45,41 @@ public class ProyeccionData {
            ps.setBoolean(9, proyeccion.isEstado());
            int exito = ps.executeUpdate();
            
-           if (exito == 1){
+           if (exito > 1){
            
            JOptionPane.showMessageDialog(null, "Proyeccion guardada exitosamente.");
            }
+           ps.close();
                   
        } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al guardar la proyeccion." + ex.getMessage());
        }              
    }
     
-    public void actualizarProyeccion (int id_proyeccion){
+    public void actualizarProyeccion (Proyeccion proy){
         
-        String sql = "UPDATE proyeccion SET idioma = ?, es3D = ?, horaInicio = ?, horaFin = ?, precio = ? WHERE id_proyeccion = ?";
+       String sql = "UPDATE proyeccion SET idioma = ? , es3D = ? ,"
+               + " subtitulada = ? , horaInicio = ? , horaFin = ? , precio = ? WHERE id_proyeccion = ? ";
             
        try {
-           PreparedStatement ps = con.prepareStatement(sql); 
-           ps.setInt(1, id_proyeccion);
+           PreparedStatement ps = con.prepareStatement(sql);
+
+           ps.setString(1, proy.getIdioma());
+           ps.setBoolean(2, proy.isEs3D());
+           ps.setBoolean(3, proy.isSubtitulada());
+           ps.setTime(4, proy.getHoraInicio());
+           ps.setTime(5, proy.getHoraFin());
+           ps.setDouble(6, proy.getPrecioLugar());
+           ps.setInt(7, proy.getIdProyeccion());
            
            int filas = ps.executeUpdate();
            
-           if(filas > 0){
+           if(filas > 0 ){
            
                JOptionPane.showMessageDialog(null, "Proyeccion actualizada.");         
+           } else {
+               
+               JOptionPane.showMessageDialog(null, "No se encontro ninguna proyeccion con ese ID ");
            }
            ps.close();
            
