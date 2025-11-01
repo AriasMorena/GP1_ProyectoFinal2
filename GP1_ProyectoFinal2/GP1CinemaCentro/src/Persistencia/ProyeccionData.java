@@ -226,5 +226,59 @@ public class ProyeccionData {
            JOptionPane.showMessageDialog(null, "Error al buscar la proyeccion" + ex.getMessage());
        }
        return proyeccion;
+    }
+
+    public void darDeAlta (int id){
+
+        int estado = 1;
+        String sql = "UPDATE proyeccion SET estado = 1 WHERE id_proyeccion = ?";
+        
+        try {
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    
+                    ps.setInt(1, id);
+                    int filas = ps.executeUpdate();
+                    
+                    if (filas > 0) {
+                        
+                        JOptionPane.showMessageDialog(null, "Proyeccion ha sido habilitada");
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(null, "No se encontro una Proyeccion con ese ID.");
+                    }
+                
+            } catch (SQLException ex){
+                
+                JOptionPane.showMessageDialog(null, "Error al habilitar la Proyeccion: " + ex);
+            }
+    }
+    
+    public void darDeBaja (int id){
+
+        String sql = "UPDATE proyeccion SET estado = ? WHERE id_proyeccion = ?";
+        
+        try {
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    
+                    ps.setBoolean(1, false);
+                    ps.setInt(2, id);
+                    
+                    
+                    
+                    int filas = ps.executeUpdate();
+                    
+                    if (filas > 0) {
+                        
+                        JOptionPane.showMessageDialog(null, "Proyeccion ha sido dada de baja.");
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(null, "No se encontro una Proyeccion con ese ID.");
+                    }
+                
+            } catch (SQLException ex){
+                
+                JOptionPane.showMessageDialog(null, "Error al inhabilitar la Proyeccion " + ex);
+            }
+        
     }    
 }

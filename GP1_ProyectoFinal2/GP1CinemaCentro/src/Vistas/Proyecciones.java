@@ -59,8 +59,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         jtProyecciones = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
         jbMostrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbHabilitar = new javax.swing.JButton();
+        jbInhabilitar = new javax.swing.JButton();
         jrNoApto = new javax.swing.JRadioButton();
         jrNoSubti = new javax.swing.JRadioButton();
 
@@ -184,9 +184,19 @@ public class Proyecciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Habilitar");
+        jbHabilitar.setText("Habilitar");
+        jbHabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbHabilitarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Inhabilitar");
+        jbInhabilitar.setText("Inhabilitar");
+        jbInhabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInhabilitarActionPerformed(evt);
+            }
+        });
 
         jrNoApto.setText("No Apto para 3D");
         jrNoApto.addActionListener(new java.awt.event.ActionListener() {
@@ -257,9 +267,9 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                                 .addGap(55, 55, 55)
                                 .addComponent(jbModificar)
                                 .addGap(51, 51, 51)
-                                .addComponent(jButton1)
+                                .addComponent(jbHabilitar)
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton2)))
+                                .addComponent(jbInhabilitar)))
                         .addGap(98, 98, 98))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,9 +320,9 @@ public class Proyecciones extends javax.swing.JInternalFrame {
                     .addComponent(jbModificar)
                     .addComponent(jbEliminar)
                     .addComponent(jbGuardar)
-                    .addComponent(jButton1)
+                    .addComponent(jbHabilitar)
                     .addComponent(jbBuscar)
-                    .addComponent(jButton2))
+                    .addComponent(jbInhabilitar))
                 .addGap(26, 26, 26)
                 .addComponent(jbMostrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -349,7 +359,6 @@ public class Proyecciones extends javax.swing.JInternalFrame {
              
             elimarProy();
             limpiarCampos();
-            jtIdPro.setEditable(false);    
         }
          
          mostraPro();    
@@ -415,7 +424,6 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         
         String nro = jtIdPro.getText();
         
-        jtIdPro.setEditable(true);
         
          if (nro.isEmpty()) {
             
@@ -424,15 +432,47 @@ public class Proyecciones extends javax.swing.JInternalFrame {
              
             modificarProy();
             limpiarCampos();
-            jtIdPro.setEditable(false);    
         }
          
          mostraPro();   
     }//GEN-LAST:event_jbModificarActionPerformed
 
+    private void jbHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbHabilitarActionPerformed
+        // TODO add your handling code here:
+        
+        String nro = jtIdPro.getText();
+        
+        
+         if (nro.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee Habilitar");
+        } else {
+             
+            darAlta();
+            limpiarCampos();
+        }
+         
+         mostraPro();  
+    }//GEN-LAST:event_jbHabilitarActionPerformed
+
+    private void jbInhabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInhabilitarActionPerformed
+        // TODO add your handling code here:
+        String nro = jtIdPro.getText();
+        
+        
+         if (nro.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese el Id de Sala que desee Inhabilitar");
+        } else {
+             
+            darBaja();
+            limpiarCampos();
+        }
+         
+         mostraPro();
+    }//GEN-LAST:event_jbInhabilitarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -447,6 +487,8 @@ public class Proyecciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbHabilitar;
+    private javax.swing.JButton jbInhabilitar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbMostrar;
     private javax.swing.JButton jbSalir;
@@ -746,6 +788,46 @@ public class Proyecciones extends javax.swing.JInternalFrame {
         }catch (Exception x){
             
             JOptionPane.showMessageDialog(this, "Error al modificar: " + x.getMessage());
+        }
+    }
+    
+    private void darAlta (){
+        
+        try {
+            
+            int id = Integer.parseInt(jtIdPro.getText());
+            
+            if (proyeD.buscarProyeccion(id) != null) {
+                
+                proyeD.darDeAlta(id);
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado");
+            }
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero");
+        }
+    }
+    
+    private void darBaja (){
+        
+        try{
+            
+            int id = Integer.parseInt(jtIdPro.getText());
+            
+            if (proyeD.buscarProyeccion(id) != null) {
+                
+                proyeD.darDeBaja(id);
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se encontro el ID indicado.");
+            }
+            
+            
+        } catch (NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this, "El ID debe ser un numero entero.");
         }
     }
     
