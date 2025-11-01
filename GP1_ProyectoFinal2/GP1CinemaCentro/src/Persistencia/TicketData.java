@@ -81,4 +81,54 @@ public class TicketData {
         }
         return ticket;
     }
+    
+    public void actualizarTicket (int codD){
+    
+        String sql = "UPDATE detalle_ticket SET id_ticket = ?, id_proyeccion = ?, cantidad = ?, subtotal = ?, total = ? WHERE codD = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, codD);
+            
+            int filas = ps.executeUpdate();
+            
+            if (filas > 0){
+            
+                JOptionPane.showMessageDialog(null, "Ticket actualizado exitosamente.");
+            } else {
+            
+                JOptionPane.showMessageDialog(null, "No se encontró un ticket con ese código");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al actualizar el ticket." + ex.getMessage());
+        }      
+    }
+    
+    public void borrarTicket (int id_ticket){
+    
+        String sql = "DELETE FROM ticket_compra WHERE id_ticket = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id_ticket);
+            
+            int exito = ps.executeUpdate();
+            
+          if (exito == 1){
+        
+               JOptionPane.showMessageDialog(null, "Ticket borrado exitosamente.");
+           } else {
+            
+               JOptionPane.showMessageDialog(null, "No se encontró un ticket con ese ID");
+        }
+         ps.close();
+        
+        }catch (SQLException ex){
+        
+            JOptionPane.showMessageDialog(null, "Error al borrar el ticket." + ex.getMessage());
+        }           
+    }
+    
 }

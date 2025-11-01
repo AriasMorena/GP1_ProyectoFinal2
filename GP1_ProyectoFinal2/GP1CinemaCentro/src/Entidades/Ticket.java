@@ -12,18 +12,27 @@ public class Ticket {
     private Date fechaCompra;
     private String medioPago;
     private double precio;
+    private Proyeccion proyeccion;
 
-    public Ticket(int codigoVenta, Date fechaCompra, String medioPago, double precio) {
+    public Ticket(int codigoVenta, Date fechaCompra, String medioPago, double precio, Proyeccion proyeccion) {
         this.codigoVenta = codigoVenta;
         this.fechaCompra = fechaCompra;
         this.medioPago = medioPago;
         this.precio = precio;
+        this.proyeccion = proyeccion;
     }
 
     public Ticket() {
     }
-    
 
+    public Proyeccion getProyeccion() {
+        return proyeccion;
+    }
+
+    public void setProyeccion(Proyeccion proyeccion) {
+        this.proyeccion = proyeccion;
+    }
+    
     public int getCodigoVenta() {
         return codigoVenta;
     }
