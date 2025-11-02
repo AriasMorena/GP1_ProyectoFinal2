@@ -36,6 +36,8 @@ public class Escritorio extends javax.swing.JFrame {
         jmiSalas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmiSalir = new javax.swing.JMenuItem();
 
@@ -45,11 +47,11 @@ public class Escritorio extends javax.swing.JFrame {
         jdEscritorio.setLayout(jdEscritorioLayout);
         jdEscritorioLayout.setHorizontalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGap(0, 1400, Short.MAX_VALUE)
         );
         jdEscritorioLayout.setVerticalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 677, Short.MAX_VALUE)
+            .addGap(0, 777, Short.MAX_VALUE)
         );
 
         jmPelicula.setText("Peliculas");
@@ -93,6 +95,18 @@ public class Escritorio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Comprador");
+
+        jMenuItem2.setText("Usuario");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu4);
+
         jMenu2.setText("Salir");
 
         jmiSalir.setText("Salir");
@@ -125,7 +139,7 @@ public class Escritorio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        Peliculas vistaP = new Peliculas ();
+        PeliculasV vistaP = new PeliculasV ();
         vistaP.setVisible(true);
         jdEscritorio.add(vistaP);
         jdEscritorio.moveToFront(vistaP);
@@ -152,7 +166,7 @@ public class Escritorio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        Salas vistaS = new Salas ();
+        SalasV vistaS = new SalasV ();
         vistaS.setVisible(true);
         jdEscritorio.add(vistaS);
         jdEscritorio.moveToFront(vistaS);
@@ -162,11 +176,22 @@ public class Escritorio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        Proyecciones vistaP = new Proyecciones ();
+        ProyeccionesV vistaP = new ProyeccionesV ();
         vistaP.setVisible(true);
         jdEscritorio.add(vistaP);
         jdEscritorio.moveToFront(vistaP);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        CompradorV vistaC = new CompradorV ();
+        vistaC.setVisible(true);
+        jdEscritorio.add(vistaC);
+        jdEscritorio.moveToFront(vistaC);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,8 +232,10 @@ public class Escritorio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenu jmPelicula;
     private javax.swing.JMenuItem jmiPelicula;

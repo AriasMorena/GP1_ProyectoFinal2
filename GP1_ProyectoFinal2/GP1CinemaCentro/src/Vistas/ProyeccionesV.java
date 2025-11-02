@@ -15,12 +15,12 @@ import java.sql.Time;
  *
  * @author lucio
  */
-public class Proyecciones extends javax.swing.JInternalFrame {
+public class ProyeccionesV extends javax.swing.JInternalFrame {
  private DefaultTableModel modelo= new DefaultTableModel();
 
     ProyeccionData proyeD = new ProyeccionData();
 
-    public Proyecciones() {
+    public ProyeccionesV() {
         initComponents();
         cabecera();
         cargarCombosP();

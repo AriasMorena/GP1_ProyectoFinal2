@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lucio
  */
-public class Peliculas extends javax.swing.JInternalFrame {
+public class PeliculasV extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo= new DefaultTableModel();
     PeliculaData peliData = new PeliculaData();
@@ -25,7 +25,7 @@ public class Peliculas extends javax.swing.JInternalFrame {
     /**
      * Creates new form Peliculas
      */
-    public Peliculas() {
+    public PeliculasV() {
         initComponents();
         cabecera();
     }

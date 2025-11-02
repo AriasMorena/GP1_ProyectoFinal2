@@ -8,12 +8,12 @@ package Vistas;
  *
  * @author lucio
  */
-public class Asientos extends javax.swing.JInternalFrame {
+public class AsientosV extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Asientos
      */
-    public Asientos() {
+    public AsientosV() {
         initComponents();
     }
 

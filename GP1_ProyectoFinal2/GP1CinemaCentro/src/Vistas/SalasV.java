@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author lucio
  */
-public class Salas extends javax.swing.JInternalFrame {
+public class SalasV extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo= new DefaultTableModel();
     SalaData salaD = new SalaData();
@@ -23,7 +23,7 @@ public class Salas extends javax.swing.JInternalFrame {
     /**
      * Creates new form Sala
      */
-    public Salas() {
+    public SalasV() {
         initComponents();
         cabecera();
         jtId.setEditable(false);

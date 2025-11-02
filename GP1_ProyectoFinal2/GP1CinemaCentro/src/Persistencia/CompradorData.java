@@ -26,7 +26,7 @@ public class CompradorData {
     }
     
     public void guardarComprador(Comprador comprador){
-         String sql = "INSERT INTO comprador (nombre, fechaNac, password, medioDePago) VALUES (?,?,?,?,?) ";
+         String sql = "INSERT INTO comprador (dni, nombre, fechaNac, password, medioDePago) VALUES (?,?,?,?,?) ";
          
               Date fechaUtil = comprador.getFechaNac();
          java.sql.Date fechaSql = null;
@@ -39,10 +39,11 @@ public class CompradorData {
          try{
              PreparedStatement ps = con.prepareStatement(sql);
 
-              ps.setString(1,comprador.getNombre());
-              ps.setDate(2, fechaSql);
-              ps.setString(3,comprador.getPassword());
-              ps.setString(4,comprador.getMedioPago());
+             ps.setInt(1, comprador.getDni());
+              ps.setString(2,comprador.getNombre());
+              ps.setDate(3, fechaSql);
+              ps.setString(4,comprador.getPassword());
+              ps.setString(5,comprador.getMedioPago());
               
               ps.executeUpdate();
               ps.close();
@@ -71,7 +72,7 @@ public class CompradorData {
                 comprador.setNombre(rs.getString("nombre"));
                 comprador.setFechaNac(rs.getDate("fechaNac"));
                 comprador.setPassword(rs.getString("password"));
-                comprador.setMedioPago(rs.getString("medioPago"));
+                comprador.setMedioPago(rs.getString("medioDePago"));
                 
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró comprador con ese DNI.");
@@ -101,7 +102,7 @@ public class CompradorData {
                 c.setNombre(rs.getString("nombre"));
                 c.setFechaNac(rs.getDate("fechaNac"));
                 c.setPassword(rs.getString("password"));
-                c.setMedioPago(rs.getString("medioPago"));
+                c.setMedioPago(rs.getString("medioDePago"));
                 compradores.add(c);   
                 
             }
@@ -113,15 +114,24 @@ public class CompradorData {
     }
     
     public void actualizarComprador(Comprador comprador){
-        String sql = "UPDATE comprador SET nombre =?, fechaNac = ?, password =?, medioPago =? WHERE dni =?";
+        String sql = "UPDATE comprador SET nombre =?, fechaNac = ?, password =?, medioDePago =? WHERE dni =?";
        
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             
+            Date fechaUtil = comprador.getFechaNac();
+            java.sql.Date fechaSql = null;
+            
+            if (fechaUtil != null) {
+                
+                fechaSql = new java.sql.Date(fechaUtil.getTime());
+            }
+            
             ps.setString(1,comprador.getNombre());
-            ps.setDate(2, new java.sql.Date(comprador.getFechaNac().getTime()));
+            ps.setDate(2, fechaSql);
             ps.setString(3, comprador.getPassword());
             ps.setString(4, comprador.getMedioPago());
+            ps.setInt(5, comprador.getDni());
             
             int filas = ps.executeUpdate();
             
