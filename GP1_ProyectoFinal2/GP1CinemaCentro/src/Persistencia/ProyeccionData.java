@@ -57,36 +57,38 @@ public class ProyeccionData {
    }
     
     public void actualizarProyeccion (Proyeccion proy){
+     
+        String sql = "UPDATE proyeccion SET id_pelicula = ? , id_sala = ? ,  idioma = ? , es3D = ? ,"
+                + " subtitulada = ? , horaInicio = ? , horaFin = ?, precio = ? WHERE id_proyeccion = ? ";
         
-       String sql = "UPDATE proyeccion SET idioma = ? , es3D = ? ,"
-               + " subtitulada = ? , horaInicio = ? , horaFin = ? , precio = ? WHERE id_proyeccion = ? ";
+        try{
             
-       try {
-           PreparedStatement ps = con.prepareStatement(sql);
-
-           ps.setString(1, proy.getIdioma());
-           ps.setBoolean(2, proy.isEs3D());
-           ps.setBoolean(3, proy.isSubtitulada());
-           ps.setTime(4, proy.getHoraInicio());
-           ps.setTime(5, proy.getHoraFin());
-           ps.setDouble(6, proy.getPrecioLugar());
-           ps.setInt(7, proy.getIdProyeccion());
-           
-           int filas = ps.executeUpdate();
-           
-           if(filas > 0 ){
-           
-               JOptionPane.showMessageDialog(null, "Proyeccion actualizada.");         
-           } else {
-               
-               JOptionPane.showMessageDialog(null, "No se encontro ninguna proyeccion con ese ID ");
-           }
-           ps.close();
-           
-       } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Error al actualizar la proyeccion." + ex.getMessage());
-       }
-       
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, proy.getPelicula().getIdPelicula());
+            ps.setInt(2, proy.getSala().getIdSala());
+            ps.setString(3, proy.getIdioma());
+            ps.setBoolean(4, proy.isEs3D());
+            ps.setBoolean(5, proy.isSubtitulada());
+            ps.setTime(6, proy.getHoraInicio());
+            ps.setTime(7, proy.getHoraFin());
+            ps.setDouble(8, proy.getPrecioLugar());
+            ps.setInt(9, proy.getIdProyeccion());
+            
+            int filas = ps.executeUpdate();
+            
+            if (filas > 0) {
+                
+                JOptionPane.showMessageDialog(null, "Proyeccion actualizada correctamente.");
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "No se encontro una proyeccion con el ID indicado.");
+            }
+            
+        } catch (SQLException ex){
+            
+            JOptionPane.showMessageDialog(null, "Error al actualizar la proyeccion: " + ex.getMessage());
+        }
     }
     
     public void borrarProyeccion (int id_proyeccion){

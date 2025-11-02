@@ -51,7 +51,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         jtPrecio = new javax.swing.JTextField();
         jbGuardar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jtIdPro = new javax.swing.JTextField();
+        jtId = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
@@ -247,7 +247,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
                                 .addComponent(jcbPeliculas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jtIdiomas)
                                 .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jrbApto)
@@ -313,7 +313,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -348,9 +348,9 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
-       String nro = jtIdPro.getText();
+       String nro = jtId.getText();
         
-        jtIdPro.setEditable(true);
+        jtId.setEditable(true);
         
          if (nro.isEmpty()) {
             
@@ -422,7 +422,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         
-        String nro = jtIdPro.getText();
+        String nro = jtId.getText();
         
         
          if (nro.isEmpty()) {
@@ -440,7 +440,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
     private void jbHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbHabilitarActionPerformed
         // TODO add your handling code here:
         
-        String nro = jtIdPro.getText();
+        String nro = jtId.getText();
         
         
          if (nro.isEmpty()) {
@@ -457,7 +457,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
 
     private void jbInhabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInhabilitarActionPerformed
         // TODO add your handling code here:
-        String nro = jtIdPro.getText();
+        String nro = jtId.getText();
         
         
          if (nro.isEmpty()) {
@@ -500,7 +500,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbApto;
     private javax.swing.JSpinner jsHoraFin;
     private javax.swing.JSpinner jsHoraInicio;
-    private javax.swing.JTextField jtIdPro;
+    private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtIdiomas;
     private javax.swing.JTextField jtPrecio;
     private javax.swing.JTable jtProyecciones;
@@ -584,7 +584,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
        
         try {
   
-            id = Integer.parseInt(jtIdPro.getText());
+            id = Integer.parseInt(jtId.getText());
             
             if (proyeD.buscarProyeccion(id) != null) {
                 
@@ -696,11 +696,11 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         
         try {
             
-            id = Integer.parseInt(jtIdPro.getText());
+            id = Integer.parseInt(jtId.getText());
             
             if (proyeD.buscarProyeccion(id) != null) {
                 
-                int confirmar = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la Proyeccion: " +jtIdPro.getText() + "?" ,
+                int confirmar = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar la Proyeccion: " +jtId.getText() + "?" ,
                         " Confirmar el Borrado: ", JOptionPane.YES_NO_OPTION);
                 
                 if (confirmar == JOptionPane.YES_OPTION) {
@@ -718,76 +718,80 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
     private void modificarProy(){
         
         try{
-        int id = Integer.parseInt(jtIdPro.getText());
-        
-        double precio = Double.parseDouble(jtPrecio.getText());
+            
+            int id = Integer.parseInt(jtId.getText());
+            
+            Pelicula peli = (Pelicula) jcbPeliculas.getSelectedItem();
+            Sala sala = (Sala) jcbSalas.getSelectedItem();
 
-        Pelicula peliS = (Pelicula) jcbPeliculas.getSelectedItem();
-        Sala salaS = (Sala) jcbSalas.getSelectedItem();
-        
-        Date horaInicio = (Date) jsHoraInicio.getValue();
-        java.sql.Time horaI = new java.sql.Time(horaInicio.getTime());
-        
-        Date horaFin = (Date) jsHoraFin.getValue();
-        java.sql.Time horaF = new java.sql.Time(horaFin.getTime());
-        
-        String idiomas = jtIdiomas.getText();
-        
-        boolean apto = false; 
-        boolean sub = false;
-        boolean estado = true;
-        
-        if (jrbApto.isSelected() == true) {
+            String idiomas = jtIdiomas.getText().trim();
             
-            apto = true;
-        } else {
+            boolean apto = false ; 
+            boolean sub = false ;
             
-            if (jrNoApto.isSelected() == true) {
-                
-                apto = false;
+            if (jrbApto.isSelected() == true) {
+            
+                apto = true;
             } else {
+            
+                if (jrNoApto.isSelected() == true) {
                 
-                JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+                    apto = false;
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+                }
             }
-        }
-       
-        if (jrSubtitulada.isSelected() == true) {
+            if (jrSubtitulada.isSelected() == true) {
             
-            sub = true;
-        } else {
-            
-            if (jrNoSubti.isSelected() == true) {
-                
-                sub = false;
+                sub = true;
             } else {
+            
+                if (jrNoSubti.isSelected() == true) {
                 
-                JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+                    sub = false;
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "Eliga una de las opciones");
+                }
             }
-        }
-        
-        Proyeccion proyExistente = proyeD.buscarProyeccion(id);
 
-        if (proyExistente != null) {
-              
-            Proyeccion proy2 = new Proyeccion(id, peliS, salaS, idiomas , apto, sub, horaI, horaF, precio, estado);
+            double precio = Double.parseDouble(jtPrecio.getText().trim());
 
-            int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Modificar la Proyeccion de ID: " + id + "?" , 
-                        " Confirmar Actualizacion:", JOptionPane.YES_NO_OPTION);
+            java.util.Date horaInicio = (java.util.Date) jsHoraInicio.getValue();
+            java.util.Date horaFin = (java.util.Date) jsHoraFin.getValue();
         
-            if (confirmar == JOptionPane.YES_OPTION) {
+            java.sql.Time sqlHoraI = new java.sql.Time(horaInicio.getTime());
+            java.sql.Time sqlHoraF = new java.sql.Time(horaFin.getTime());
+                   
+            boolean estado = true;
+            
+            Proyeccion proy = proyeD.buscarProyeccion(id);
+            
+            if (proy == null) {
                 
-                proyeD.actualizarProyeccion(proy2);           
-            }
+                JOptionPane.showMessageDialog(this, "No se encontro una proyeccion con ese ID");
+                return;
             } else {
-                
-                JOptionPane.showMessageDialog(this, "No se encontro el id .");
-            }       
+            proy.setPelicula(peli);
+            proy.setSala(sala);
+            proy.setIdioma(idiomas);
+            proy.setEs3D(apto);
+            proy.setSubtitulada(sub);
+            proy.setHoraInicio(sqlHoraI);
+            proy.setHoraFin(sqlHoraF);
+            proy.setPrecioLugar(precio);
+            
+            proyeD.actualizarProyeccion(proy);
+
+            }
+            
         } catch (NumberFormatException x){
             
-            JOptionPane.showMessageDialog(this, "Verifique que el ID y el precio sean válidos");
-        }catch (Exception x){
+            JOptionPane.showMessageDialog(this, "Verifique que todos los campos sean Validos.");
+        } catch (Exception x){
             
-            JOptionPane.showMessageDialog(this, "Error al modificar: " + x.getMessage());
+            JOptionPane.showMessageDialog(this, "Error Inesperado: " + x.getMessage());
         }
     }
     
@@ -795,7 +799,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         
         try {
             
-            int id = Integer.parseInt(jtIdPro.getText());
+            int id = Integer.parseInt(jtId.getText());
             
             if (proyeD.buscarProyeccion(id) != null) {
                 
@@ -814,7 +818,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         
         try{
             
-            int id = Integer.parseInt(jtIdPro.getText());
+            int id = Integer.parseInt(jtId.getText());
             
             if (proyeD.buscarProyeccion(id) != null) {
                 
@@ -831,13 +835,6 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
     //------------Visuales------------
     
     private void cargarCombosP(){
@@ -847,7 +844,10 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         
         for (Pelicula p: peliD.listarPeliculas()) {
             
-            jcbPeliculas.addItem(p);         
+            if (p.isEnCartelera() == true) {
+                
+                jcbPeliculas.addItem(p);
+            }
         }
     }
     
@@ -857,7 +857,11 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
         
         for (Sala s: salaD.listarSala()) {
             
-            jcbSalas.addItem(s);
+            if (!s.getEstado().equalsIgnoreCase("Inhabilitado")) {
+                
+                jcbSalas.addItem(s);
+
+            }
         }
     }
     private void cabecera(){
@@ -890,7 +894,7 @@ public class ProyeccionesV extends javax.swing.JInternalFrame {
             jrNoSubti.setSelected(false);
             jrNoApto.setSelected(false);
             
-            jtIdPro.setText("");
+            jtId.setText("");
             jtPrecio.setText("");
             jtIdiomas.setText("");
      }
