@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2025 a las 01:44:58
+-- Tiempo de generación: 02-11-2025 a las 18:58:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,7 +32,8 @@ CREATE TABLE `asiento` (
   `fila` varchar(10) NOT NULL,
   `numero` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `id_proyeccion` int(11) NOT NULL
+  `id_proyeccion` int(11) NOT NULL,
+  `id_sala` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -48,6 +49,13 @@ CREATE TABLE `comprador` (
   `password` varchar(100) NOT NULL,
   `medioDePago` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comprador`
+--
+
+INSERT INTO `comprador` (`dni`, `nombre`, `fechaNac`, `password`, `medioDePago`) VALUES
+(41750456, 'Valentina Gatica', '1999-03-04', 'abuela12', 'Debito');
 
 -- --------------------------------------------------------
 
@@ -81,6 +89,15 @@ CREATE TABLE `pelicula` (
   `enCartelera` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pelicula`
+--
+
+INSERT INTO `pelicula` (`id_pelicula`, `titulo`, `director`, `actores`, `origen`, `genero`, `estreno`, `enCartelera`) VALUES
+(16, 'Chainsaw - Man', 'Fujimoto', 'Denji, Reze', 'Japones', 'Anime', '2025-09-24', 0),
+(17, 'Avatar', 'Steven', 'sadad.', 'EE.UU', 'Aventura', '2025-12-17', 1),
+(18, 'Proyecto Final', 'Profes', 'Morena Arias, Lucio Ponce, Guada Bustos', 'Argentina', 'Ciencia Ficcion', '2025-11-01', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -96,8 +113,17 @@ CREATE TABLE `proyeccion` (
   `subtitulada` tinyint(1) NOT NULL,
   `horaInicio` time NOT NULL,
   `horaFin` time NOT NULL,
-  `precio` double NOT NULL
+  `precio` double NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proyeccion`
+--
+
+INSERT INTO `proyeccion` (`id_proyeccion`, `id_pelicula`, `id_sala`, `idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFin`, `precio`, `estado`) VALUES
+(11, 17, 8, 'Ingles', 0, 1, '05:37:53', '05:37:53', 12000, 0),
+(13, 18, 8, 'Ingles', 1, 1, '05:41:14', '07:41:00', 1000, 1);
 
 -- --------------------------------------------------------
 
@@ -112,6 +138,14 @@ CREATE TABLE `sala` (
   `capacidad` int(100) NOT NULL,
   `estado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sala`
+--
+
+INSERT INTO `sala` (`id_Sala`, `NroSala`, `apta3D`, `capacidad`, `estado`) VALUES
+(7, 3, 1, 300, 'Habilitado'),
+(8, 6, 1, 150, 'Habilitado');
 
 -- --------------------------------------------------------
 
@@ -136,6 +170,7 @@ CREATE TABLE `ticket_compra` (
 --
 ALTER TABLE `asiento`
   ADD PRIMARY KEY (`id_lugar`),
+  ADD UNIQUE KEY `id_sala` (`id_sala`),
   ADD KEY `id_proyeccion` (`id_proyeccion`);
 
 --
@@ -200,19 +235,19 @@ ALTER TABLE `detalle_ticket`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id_pelicula` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pelicula` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `proyeccion`
 --
 ALTER TABLE `proyeccion`
-  MODIFY `id_proyeccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proyeccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `sala`
 --
 ALTER TABLE `sala`
-  MODIFY `id_Sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_Sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
@@ -222,7 +257,8 @@ ALTER TABLE `sala`
 -- Filtros para la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`id_proyeccion`) REFERENCES `proyeccion` (`id_proyeccion`);
+  ADD CONSTRAINT `asiento_ibfk_1` FOREIGN KEY (`id_proyeccion`) REFERENCES `proyeccion` (`id_proyeccion`),
+  ADD CONSTRAINT `asiento_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id_Sala`);
 
 --
 -- Filtros para la tabla `detalle_ticket`
