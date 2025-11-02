@@ -10,24 +10,27 @@ public class Asiento {
     private String fila;
     private int número;
     private boolean disponible;
-    private int idProyeccion;
+    private Proyeccion proy ;
+    private Sala sala;
+    private int idAsiento;
 
-    public Asiento(String fila, int número, boolean disponible, int idProyeccion) {
+    public Asiento(String fila, int número, boolean disponible, Proyeccion proy, Sala sala) {
         this.fila = fila;
         this.número = número;
         this.disponible = disponible;
-        this.idProyeccion = idProyeccion;
+        this.proy = proy;
+        this.sala = sala;
     }
 
     public Asiento() {
     }
 
-    public int getIdProyeccion() {
-        return idProyeccion;
+    public int getIdAsiento() {
+        return idAsiento;
     }
 
-    public void setIdProyeccion(int idProyeccion) {
-        this.idProyeccion = idProyeccion;
+    public void setIdAsiento(int idAsiento) {
+        this.idAsiento = idAsiento;
     }
     
     public String getFila() {
@@ -53,5 +56,20 @@ public class Asiento {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-       
+
+    public Proyeccion getProy() {
+        return proy;
+    }
+
+    public void setProy(Proyeccion proy) {
+        this.proy = proy;
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }      
 }
